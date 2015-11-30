@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: Chaos Theory
+  profiles:
+    active: development
+
+server:
+  port: 9090
+
+---
+
+spring:
+  profiles: development
+  datasource:
+    url: jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+servlet:
+  container:
+    maxThreads: 15
+
+init:
+  json: books.json
