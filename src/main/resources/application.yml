@@ -12,7 +12,7 @@ server:
 spring:
   profiles: development
   datasource:
-    url: jdbc:h2:mem:AZ;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:AZ
     driverClassName: org.h2.Driver
     username: sa
     password:
@@ -25,3 +25,7 @@ servlet:
 
 init:
   json: books.json
+
+security:
+  user:
+    password: aaa

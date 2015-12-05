@@ -1,11 +1,11 @@
 package pl.chaos.theory.view.book;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pl.chaos.theory.db.model.Book;
+import pl.chaos.theory.util.Request;
 
 @Component("book")
-@Scope(value = "request")
+@Request
 public class BookView extends Book {
 
 	public BookView() { }

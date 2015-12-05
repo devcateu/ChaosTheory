@@ -13,6 +13,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;
 import pl.chaos.theory.configuration.Initializer;
 import pl.chaos.theory.h2.H2Console;
+import pl.chaos.theory.security.SecurityConfiguration;
 
 import javax.faces.webapp.FacesServlet;
 
@@ -28,14 +29,13 @@ public class ChaosTheoryApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(ChaosTheoryApplication.class, Initializer.class, H2Console.class);
+		return application.sources(ChaosTheoryApplication.class, Initializer.class, H2Console.class, SecurityConfiguration.class);
 	}
 
 	@Bean
 	public ServletRegistrationBean servletRegistrationBean() {
 		FacesServlet servlet = new FacesServlet();
-		ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(servlet, "*.jsf");
-		return servletRegistrationBean;
+		return new ServletRegistrationBean(servlet, "*.jsf");
 	}
 
 	@Bean

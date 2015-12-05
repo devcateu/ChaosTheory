@@ -1,10 +1,10 @@
 package pl.chaos.theory.view.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import pl.chaos.theory.db.model.Book;
 import pl.chaos.theory.db.repository.BookRepository;
+import pl.chaos.theory.util.Request;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component("model")
-@Scope(value = "request")
+@Request
 public class BookModel {
 
 	@Autowired

@@ -1,5 +1,40 @@
 [
   {
+    "_class": "pl.chaos.theory.db.model.User",
+    "id": 112,
+    "email": "admic",
+    "passwordHash": "admic",
+    "role": "ADMIN"
+  },
+  {
+    "_class": "pl.chaos.theory.db.model.User",
+    "id": 10,
+    "email": "admino",
+    "passwordHash": "admino",
+    "role": "ADMIN"
+  },
+  {
+    "_class": "pl.chaos.theory.db.model.User",
+    "id": 1,
+    "email": "user",
+    "passwordHash": "user",
+    "role": "USER"
+  },
+  {
+    "_class": "pl.chaos.theory.db.model.User",
+    "id": 11,
+    "email": "admin2",
+    "passwordHash": "admin2",
+    "role": "ADMIN"
+  },
+  {
+    "_class": "pl.chaos.theory.db.model.User",
+    "id": 32,
+    "email": "user2",
+    "passwordHash": "user2",
+    "role": "USER"
+  },
+  {
     "_class": "pl.chaos.theory.db.model.Book",
     "id": 0,
     "title": "Functional Programming in Scala",
