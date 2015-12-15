@@ -1,12 +1,13 @@
 package pl.chaos.theory.db.service;
 
-import pl.chaos.theory.db.model.User;
+import pl.chaos.theory.dto.model.PasswordDto;
+import pl.chaos.theory.dto.model.UserDto;
 
 public interface UserService {
 
-	User getUserById(long id);
+	UserDto getUserById(long id);
 
-	User getUserByEmail(String email);
+	UserDto getUserByEmail(String email);
 
-	//User create(UserCreateForm form);
+	UserDto create(PasswordDto passwordDto, UserDto userDto);
 }

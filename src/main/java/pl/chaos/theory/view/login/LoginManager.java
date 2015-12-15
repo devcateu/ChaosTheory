@@ -14,6 +14,7 @@ import java.io.IOException;
 @Component("loginManager")
 @Request
 public class LoginManager {
+
 	public String doLogin() throws IOException, ServletException {
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 		RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("/j_spring_security_check");
@@ -21,4 +22,5 @@ public class LoginManager {
 		FacesContext.getCurrentInstance().responseComplete();
 		return null;
 	}
+
 }

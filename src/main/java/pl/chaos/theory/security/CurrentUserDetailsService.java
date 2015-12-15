@@ -7,21 +7,21 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import pl.chaos.theory.db.model.User;
-import pl.chaos.theory.db.service.UserService;
+import pl.chaos.theory.db.repository.UserRepository;
 
 @Component
 @Service
 public class CurrentUserDetailsService implements UserDetailsService {
-	private final UserService userService;
+	private final UserRepository userRepository;
 
 	@Autowired
-	public CurrentUserDetailsService(UserService userService) {
-		this.userService = userService;
+	public CurrentUserDetailsService(UserRepository userRepository) {
+		this.userRepository = userRepository;
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		User user = userService.getUserByEmail(email);
+		User user = userRepository.findOneByEmail(email);
 		if (user == null) {
 			throw new UsernameNotFoundException(String.format("User with email=%s was not found", email));
 		}
