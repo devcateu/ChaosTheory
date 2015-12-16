@@ -7,6 +7,7 @@ import pl.chaos.theory.dto.model.PasswordDto;
 import pl.chaos.theory.dto.model.UserDto;
 import pl.chaos.theory.security.Role;
 import pl.chaos.theory.util.Request;
+import pl.chaos.theory.view.login.validate.PasswordValidation;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -18,20 +19,20 @@ public class RegisterManager {
 	private UserService userService;
 	private PasswordDto passwordDto;
 	private UserDto userDto;
+	private PasswordValidation passwordValidation;
 
 	@Autowired
-	public RegisterManager(UserService userService, PasswordDto passwordDto, UserDto userDto) {
+	public RegisterManager(UserService userService, PasswordDto passwordDto, UserDto userDto, PasswordValidation passwordValidation) {
 		this.userService = userService;
 		this.passwordDto = passwordDto;
 		this.userDto = userDto;
+		this.passwordValidation = passwordValidation;
 	}
 
 	public String register() {
 		String retPage;
 		try {
-			if (!passwordDto.getPassword().equals(passwordDto.getPasswordRepeated())) {
-				throw new Exception("Passwords do not match!!");
-			}
+			passwordValidation.validate(passwordDto);
 			userDto.setRole(Role.USER);
 			userDto = userService.create(passwordDto, userDto);
 			addMessage(FacesMessage.SEVERITY_INFO, "Registration Success!");

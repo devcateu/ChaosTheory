@@ -41,4 +41,16 @@ public class UserServiceImpl implements UserService {
 		user = userRepository.save(user);
 		return userMapper.toDto(user);
 	}
+
+	@Override
+	public String getHashedPassword(String email) {
+		return userRepository.findOneByEmail(email).getEmail();
+	}
+
+	@Override
+	public void changePassword(String newPassword, String email) {
+		User user = userRepository.findOneByEmail(email);
+		user.setPasswordHash(newPassword);
+		userRepository.save(user);
+	}
 }

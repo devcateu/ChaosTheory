@@ -10,4 +10,8 @@ public interface UserService {
 	UserDto getUserByEmail(String email);
 
 	UserDto create(PasswordDto passwordDto, UserDto userDto);
+
+	String getHashedPassword(String email);
+
+	void changePassword(String newPassword, String oldPassword);
 }

@@ -6,25 +6,26 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import pl.chaos.theory.db.model.User;
-import pl.chaos.theory.db.repository.UserRepository;
+import pl.chaos.theory.db.service.UserService;
+import pl.chaos.theory.dto.model.UserDto;
 
 @Component
 @Service
 public class CurrentUserDetailsService implements UserDetailsService {
-	private final UserRepository userRepository;
+	private final UserService userService;
 
 	@Autowired
-	public CurrentUserDetailsService(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public CurrentUserDetailsService(UserService userService) {
+		this.userService = userService;
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		User user = userRepository.findOneByEmail(email);
+		UserDto user = userService.getUserByEmail(email);
 		if (user == null) {
 			throw new UsernameNotFoundException(String.format("User with email=%s was not found", email));
 		}
-		return new CurrentUser(user);
+		String hashedPassword = userService.getHashedPassword(email);
+		return new CurrentUser(user, hashedPassword);
 	}
 }
