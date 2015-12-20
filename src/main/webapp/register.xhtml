@@ -28,7 +28,7 @@
 
             <div id="loginBtnPanelId">
                 <h:commandButton id="btnLoginId" value="Register" type="submit"
-                                 action="${registerManager.register()}" styleClass="loginPanelBtn"/>
+                                 action="${authenticationManager.register(user, password)}" styleClass="loginPanelBtn"/>
             </div>
         </div>
     </div>

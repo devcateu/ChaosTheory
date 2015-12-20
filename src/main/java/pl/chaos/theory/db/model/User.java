@@ -6,21 +6,20 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User extends Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
-
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
-
 	@Column(name = "password_hash", nullable = false)
 	private String passwordHash;
-
 	@Column(name = "role", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
+	@Column(name = "locked", nullable = false)
+	private boolean locked;
 
 	public Long getId() {
 		return id;
@@ -52,5 +51,13 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
 	}
 }

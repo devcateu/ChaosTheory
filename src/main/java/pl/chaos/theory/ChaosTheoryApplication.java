@@ -7,17 +7,19 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.PathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.repository.init.Jackson2RepositoryPopulatorFactoryBean;
-import pl.chaos.theory.configuration.Initializer;
+import pl.chaos.theory.configuration.JSFInitializer;
 import pl.chaos.theory.h2.H2Console;
 import pl.chaos.theory.security.SecurityConfiguration;
 
 import javax.faces.webapp.FacesServlet;
 
 @SpringBootApplication
+@Import({H2Console.class, SecurityConfiguration.class})
 public class ChaosTheoryApplication extends SpringBootServletInitializer {
 
 	@Value("${init.json}")
@@ -29,7 +31,7 @@ public class ChaosTheoryApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(ChaosTheoryApplication.class, Initializer.class, H2Console.class, SecurityConfiguration.class);
+		return application.sources(ChaosTheoryApplication.class, JSFInitializer.class, H2Console.class, SecurityConfiguration.class);
 	}
 
 	@Bean

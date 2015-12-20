@@ -5,41 +5,36 @@ import org.springframework.stereotype.Service;
 import pl.chaos.theory.db.model.User;
 import pl.chaos.theory.db.repository.UserRepository;
 import pl.chaos.theory.db.service.UserService;
-import pl.chaos.theory.dto.mapper.UserMapper;
 import pl.chaos.theory.dto.model.PasswordDto;
 import pl.chaos.theory.dto.model.UserDto;
+import pl.chaos.theory.util.mapper.Mapper;
+
+import java.util.Collection;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-	private UserRepository userRepository;
-	private UserMapper userMapper;
-
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
-		this.userRepository = userRepository;
-		this.userMapper = userMapper;
-	}
+	private UserRepository userRepository;
+	@Autowired
+	private Mapper mapper;
 
 	@Override
 	public UserDto getUserById(long id) {
-		return userMapper.toDto(userRepository.findOne(id));
+		return mapper.map(userRepository.findOne(id), UserDto.class);
 	}
 
 	@Override
 	public UserDto getUserByEmail(String email) {
-		return userMapper.toDto(userRepository.findOneByEmail(email));
+		return mapper.map(userRepository.findOneByEmail(email), UserDto.class);
 	}
 
 	@Override
 	public UserDto create(PasswordDto passwordDto, UserDto userDto) {
-		User user = new User();
-		user.setRole(userDto.getRole());
-		user.setEmail(userDto.getEmail());
-		user.setId(userDto.getId());
+		User user = mapper.map(userDto, User.class);
 		user.setPasswordHash(passwordDto.getPassword());
 		user = userRepository.save(user);
-		return userMapper.toDto(user);
+		return mapper.map(user, UserDto.class);
 	}
 
 	@Override
@@ -51,6 +46,18 @@ public class UserServiceImpl implements UserService {
 	public void changePassword(String newPassword, String email) {
 		User user = userRepository.findOneByEmail(email);
 		user.setPasswordHash(newPassword);
+		userRepository.save(user);
+	}
+
+	@Override
+	public Collection<UserDto> getAll() {
+		return mapper.mapCollection(userRepository.findAll(), UserDto.class);
+	}
+
+	@Override
+	public void updateLock(UserDto userDto) {
+		User user = userRepository.findOneByEmail(userDto.getEmail());
+		user.setLocked(userDto.isLocked());
 		userRepository.save(user);
 	}
 }

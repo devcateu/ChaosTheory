@@ -3,6 +3,8 @@ package pl.chaos.theory.db.service;
 import pl.chaos.theory.dto.model.PasswordDto;
 import pl.chaos.theory.dto.model.UserDto;
 
+import java.util.Collection;
+
 public interface UserService {
 
 	UserDto getUserById(long id);
@@ -14,4 +16,8 @@ public interface UserService {
 	String getHashedPassword(String email);
 
 	void changePassword(String newPassword, String oldPassword);
+
+	Collection<UserDto> getAll();
+
+	void updateLock(UserDto userDto);
 }
