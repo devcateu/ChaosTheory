@@ -11,15 +11,11 @@ class MethodSelector {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
 
 		MethodSelector that = (MethodSelector) o;
-
 		return returnClass.equals(that.returnClass) && parameterClass.equals(that.parameterClass);
 	}
 

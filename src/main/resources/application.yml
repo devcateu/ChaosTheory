@@ -6,26 +6,40 @@ spring:
 
 server:
   port: 9090
+---
+
+spring:
+  profiles:
+    active: development
+    include: h2
+
+
+servlet:
+  container:
+    maxThreads: 15
+
+security:
+  user:
+    password: aaa
 
 ---
 
 spring:
-  profiles: development
+  profiles:
+    active: test
+    include: h2
+
+---
+
+spring:
+  profiles: h2
   datasource:
-    url: jdbc:h2:mem:AZ
+    url: jdbc:h2:mem:AZ;DB_CLOSE_ON_EXIT=FALSE
     driverClassName: org.h2.Driver
     username: sa
     password:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
 
-servlet:
-  container:
-    maxThreads: 15
-
 init:
   json: books.json
-
-security:
-  user:
-    password: aaa

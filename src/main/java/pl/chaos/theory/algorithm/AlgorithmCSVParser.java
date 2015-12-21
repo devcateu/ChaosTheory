@@ -13,21 +13,36 @@ import java.util.Map;
 @Component
 public class AlgorithmCSVParser {
 
-	public Map<String, Double> parse(String csv) throws IOException {
+	public Map<String, Double> parse(String csv) {
+
+		try {
+			CSVParser csvParser = CSVParser.parse(csv, CSVFormat.RFC4180);
+			return readLines(csv, csvParser);
+		} catch (IOException e) {
+			throw new ParserException(csv);
+		}
+	}
+
+	private Map<String, Double> readLines(String csv, CSVParser csvParser) throws IOException {
 		Map<String, Double> result = new HashMap<String, Double>();
-		CSVParser csvParser = CSVParser.parse(csv, CSVFormat.RFC4180);
 		for (CSVRecord csvRecord : csvParser.getRecords()) {
-			if (csvRecord.size() > 2) {
-				throw new RuntimeException("Wrong line in file: " + csvRecord.toString());
-			}
+			readLine(csv, result, csvRecord);
+		}
+		return result;
+	}
 
-			String parameterName = csvRecord.get(0);
-			String parameterValueString = csvRecord.get(1);
-			Double parameterValue = Double.parseDouble(parameterValueString);
-
-			result.put(parameterName, parameterValue);
+	private void readLine(String csv, Map<String, Double> result, CSVRecord csvRecord) {
+		if (csvRecord.size() != 2) {
+			throw new WrongLineInCSVFile(csvRecord, csv);
 		}
 
-		return result;
+		String parameterName = csvRecord.get(0);
+		String parameterValueString = csvRecord.get(1);
+		Double parameterValue = Double.parseDouble(parameterValueString);
+		if (result.containsKey(parameterName)) {
+			throw new RepeatedParameterException(parameterName, result.get(parameterName), parameterValue);
+		}
+
+		result.put(parameterName, parameterValue);
 	}
 }

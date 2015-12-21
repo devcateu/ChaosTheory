@@ -1,12 +1,15 @@
 package pl.chaos.theory.dto.model;
 
+import pl.chaos.theory.util.Util;
+
+import java.util.HashSet;
 import java.util.Set;
 
 public class AlgorithmDto extends Dto {
+	private final Set<ParameterInfoDto> parameterInfoSet = new HashSet<ParameterInfoDto>();
 	private Long id;
 	private String name;
 	private String description;
-	private Set<ParameterInfoDto> parameterInfoSet;
 
 	public Long getId() {
 		return id;
@@ -37,6 +40,6 @@ public class AlgorithmDto extends Dto {
 	}
 
 	public void setParameterInfoSet(Set<ParameterInfoDto> parameterInfoSet) {
-		this.parameterInfoSet = parameterInfoSet;
+		Util.copyCollection(this.parameterInfoSet, parameterInfoSet);
 	}
 }

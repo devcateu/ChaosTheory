@@ -29,15 +29,21 @@ public class Mapper {
 		}
 	}
 
-	public <RET, IN> RET map(IN in, Class<RET> returnClass) {
-		MethodInvoker invoker = searchingInvoker(in, returnClass);
-		return (RET) invoker.invoke(in);
+	public <RET> RET map(Object param, Class<RET> returnClass) {
+		if (param == null) {
+			return null;
+		}
+		MethodInvoker invoker = searchingInvoker(param, returnClass);
+		return (RET) invoker.invoke(param);
 	}
 
-	public <RET, IN> Set<RET> mapCollection(Collection<IN> paramsToMapping, Class<RET> returnClass) {
+	public <RET> Set<RET> mapCollection(Collection paramsToMapping, Class<RET> returnClass) {
 		Set<RET> set = new HashSet<RET>();
+		if (paramsToMapping == null) {
+			return set;
+		}
 		MethodInvoker invoker = null;
-		for (IN in : paramsToMapping) {
+		for (Object in : paramsToMapping) {
 			if (invoker == null) {
 				invoker = searchingInvoker(in, returnClass);
 			}
@@ -46,8 +52,8 @@ public class Mapper {
 		return set;
 	}
 
-	private <RET, IN> MethodInvoker searchingInvoker(IN in, Class<RET> returnClass) {
-		MethodSelector selector = new MethodSelector(returnClass, in.getClass());
+	private <RET> MethodInvoker searchingInvoker(Object param, Class<RET> returnClass) {
+		MethodSelector selector = new MethodSelector(returnClass, param.getClass());
 		MethodInvoker invoker = map.get(selector);
 		if (invoker == null) {
 			throw new RuntimeException("Invoker not found: " + selector);
