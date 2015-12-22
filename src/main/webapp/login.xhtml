@@ -1,46 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:form id="loginFormId" prependId="false">
-    <div class="full-box" style="text-align: center">
-        <div class="child-box box-c3">
-            <h3>Login</h3>
+<ui:composition template="layout.xhtml">
+  <ui:define name="header">
+    no head
+  </ui:define>
+  <ui:define name="content">
+    <h:form id="loginFormId" prependId="false">
+      <h3>Login</h3>
 
-            <div class="fluid-row">
-                <div class="fluid-column fluid-c12">
-                    <div class="forLabel" style="width: 30%">
-                        <h:outputLabel for="username" value="User"/>
-                    </div>
-                    <div class="forField" style="width: 65%">
-                        <h:inputText id="username" required="true"
-                                     requiredMessage="Please enter username (or go to hell...)"/>
-                        <h:messages for="username"/>
-                    </div>
-                </div>
-                <div class="fluid-column fluid-c12">
-                    <div class="forLabel" style="width: 30%">
-                        <h:outputLabel for="password" value="Password"/>
-                    </div>
-                    <div class="forField" style="width: 65%">
-                        <h:inputSecret id="password" required="true"
-                                       requiredMessage="Please enter password (otherwise you'll die!!)"
-                                       name="password"/>
-                        <h:messages for="password"/>
-                    </div>
-                </div>
-            </div>
-            <ui:fragment rendered="${!empty param['error']}">
-                <div>Connection failed: user and/or password are wrong.</div>
-            </ui:fragment>
+      <h:panelGrid columns="3" cellpadding="5">
+        <h:outputLabel for="username" value="User"/>
 
-            <div id="loginBtnPanelId">
-                <h:commandButton id="btnLoginId" value="Login" type="submit"
-                                 action="${authenticationManager.login()}" styleClass="loginPanelBtn"/>
-            </div>
+        <p:inputText id="username" required="true"
+                     requiredMessage="Please enter username"/>
+        <p:messages for="username"/>
+        <h:outputLabel for="password" value="Password"/>
+        <p:password id="password" required="true"
+                    requiredMessage="Please enter password"
+                    name="password"/>
+        <p:messages for="password"/>
+      </h:panelGrid>
+      <ui:fragment rendered="${!empty param['error']}">
+        <div style="background: lightgreen; color: darkred; text-align: center; border-radius: 8px; padding:2px; margin: 10px;">
+          Login and/or password are wrong.
         </div>
-    </div>
-</h:form>
+      </ui:fragment>
+
+      <p:commandButton id="btnLoginId" value="Login" type="submit" ajax="false"
+                       action="${authenticationManager.login()}" styleClass="loginPanelBtn"/>
+    </h:form>
+  </ui:define>
+</ui:composition>
 </html>
