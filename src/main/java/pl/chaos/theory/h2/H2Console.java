@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import pl.chaos.theory.configuration.Profiles;
 
-@Profile(Profiles.DEVELOPMENT)
+@Profile(value = Profiles.DEVELOPMENT)
 @Configuration
 public class H2Console {
 	@Bean

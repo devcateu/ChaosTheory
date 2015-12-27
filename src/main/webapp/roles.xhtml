@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="layout.xhtml">
+
+  <ui:define name="content">
+    <h3>Change Role</h3>
+    <h:form id="form">
+      <p:dataTable var="user" value="#{adminManager.allUsers}" editable="true">
+
+        <p:ajax event="rowEdit" listener="#{adminManager.saveChangeRole(user)}"/>
+
+        <p:column headerText="e-mail" sortBy="#{user.email}">
+          <h:outputText value="#{user.email}"/>
+        </p:column>
+
+        <p:column headerText="Role" sortBy="#{user.role}">
+          <p:cellEditor>
+            <f:facet name="output"><h:outputText value="#{user.role}"/></f:facet>
+            <f:facet name="input">
+              <h:selectOneMenu value="#{user.role}">
+                <f:selectItems value="#{adminManager.roles}"/>
+              </h:selectOneMenu>
+            </f:facet>
+          </p:cellEditor>
+        </p:column>
+
+        <p:column style="width:32px">
+          <p:rowEditor/>
+        </p:column>
+      </p:dataTable>
+    </h:form>
+  </ui:define>
+
+</ui:composition>
+</html>

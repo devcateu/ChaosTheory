@@ -14,7 +14,6 @@ public class UserMapper extends BaseMapper<User, UserDto> {
 		dto.setEmail(user.getEmail());
 		dto.setId(user.getId());
 		dto.setRole(user.getRole());
-		dto.setLocked(user.isLocked());
 		return dto;
 	}
 
@@ -23,7 +22,6 @@ public class UserMapper extends BaseMapper<User, UserDto> {
 		User user = new User();
 		user.setRole(userDto.getRole());
 		user.setId(userDto.getId());
-		user.setLocked(userDto.isLocked());
 		user.setEmail(userDto.getEmail());
 		return user;
 	}

@@ -8,6 +8,8 @@ import pl.chaos.theory.db.service.UserService;
 import pl.chaos.theory.dto.model.PasswordDto;
 import pl.chaos.theory.dto.model.UserDto;
 import pl.chaos.theory.security.Role;
+import pl.chaos.theory.security.SecurityUtil;
+import pl.chaos.theory.util.Util;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -17,33 +19,37 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
-@Component("authenticationManager")
+@Component("authManager")
 public class AuthenticationManager {
 	private final UserService userService;
-	private final PasswordValidation passwordValidation;
 
 	@Autowired
-	public AuthenticationManager(UserService userService, PasswordValidation passwordValidation) {
+	public AuthenticationManager(UserService userService) {
 		this.userService = userService;
-		this.passwordValidation = passwordValidation;
 	}
 
-	public void changePassword(String oldPassword, PasswordDto password) throws Exception {
+	public String changePassword(ChangePasswordView changePasswordView) throws Exception {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userName = auth.getName();
 
 		String passwordFromDb = userService.getHashedPassword(userName);
-		if (!passwordFromDb.equals(oldPassword)) {
-			throw new RuntimeException("wrong old password");
-		}
+		String oldPassword = changePasswordView.getOldPassword();
 
-		passwordValidation.validate(password);
-		userService.changePassword(password.getPassword(), userName);
+		if (!passwordFromDb.equals(oldPassword)) {
+			Util.addMessage("oldPassword", FacesMessage.SEVERITY_ERROR, "Wrong old Password.");
+			return null;
+		} else {
+			String newPassword = changePasswordView.getNewPassword().getPassword();
+			userService.changePassword(newPassword, userName);
+			Util.addMessage("indexMessage", FacesMessage.SEVERITY_INFO, "Change Password successful.");
+			return "index";
+		}
 	}
 
-	public String login() throws IOException, ServletException {
+	public String login(LoginView loginView) throws IOException, ServletException {
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 		RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("/j_spring_security_check");
 		dispatcher.forward((ServletRequest) context.getRequest(), (ServletResponse) context.getResponse());
@@ -51,16 +57,25 @@ public class AuthenticationManager {
 		return null;
 	}
 
-	public String register(PasswordDto passwordDto, UserDto userDto) {
+	public String logout() throws IOException, ServletException {
+		SecurityContextHolder.getContext().setAuthentication(null);
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
+				.clear();
+		SecurityContextHolder.clearContext();
+		return "index";
+	}
+
+	public String register(RegisterView register) {
 		String retPage;
+		UserDto userDto = register.getUser();
+		PasswordDto passwordDto = register.getPassword();
 		try {
-			passwordValidation.validate(passwordDto);
 			userDto.setRole(Role.USER);
 			userDto = userService.create(passwordDto, userDto);
-			addMessage(FacesMessage.SEVERITY_INFO, "Registration Success!");
+			Util.addMessage(FacesMessage.SEVERITY_INFO, "Registration Success!");
 			retPage = "login";
 		} catch (Exception e) {
-			addMessage(FacesMessage.SEVERITY_ERROR, "Registration Failure, " + e.getMessage());
+			Util.addMessage(FacesMessage.SEVERITY_ERROR, "Registration Failure, " + e.getMessage());
 			retPage = null;
 		} finally {
 			passwordDto.reset();
@@ -69,10 +84,17 @@ public class AuthenticationManager {
 		return retPage;
 	}
 
-	private void addMessage(FacesMessage.Severity facesMessage, String message) {
-		FacesContext.getCurrentInstance().addMessage(
-				null,
-				new FacesMessage(facesMessage,
-						message, ""));
+	public void updateMessages() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		Map<String, String> params = facesContext.getExternalContext().getRequestParameterMap();
+		if (params.containsKey("error")) {
+			Util.addMessage(null, FacesMessage.SEVERITY_ERROR, "Login failuire.");
+		}
+	}
+
+	public void redirect() throws IOException {
+		if (SecurityUtil.isAuthenticated()) {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+		}
 	}
 }

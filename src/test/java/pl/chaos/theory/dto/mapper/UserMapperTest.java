@@ -19,14 +19,12 @@ public class UserMapperTest extends BaseSpringTest {
 		User user = new User();
 		user.setEmail("mail");
 		user.setRole(Role.USER);
-		user.setLocked(true);
 		user.setId(11L);
 
 		UserDto userDto = userMapper.mapAtoB(user);
 
 		assertThat(userDto.getRole()).isEqualTo(user.getRole());
 		assertThat(userDto.getEmail()).isEqualTo(user.getEmail());
-		assertThat(userDto.isLocked()).isEqualTo(user.isLocked());
 		assertThat(userDto.getId()).isEqualTo(user.getId());
 	}
 
@@ -35,14 +33,12 @@ public class UserMapperTest extends BaseSpringTest {
 		UserDto userDto = new UserDto();
 		userDto.setEmail("mail");
 		userDto.setRole(Role.USER);
-		userDto.setLocked(true);
 		userDto.setId(11L);
 
 		User user = userMapper.mapBtoA(userDto);
 
 		assertThat(user.getRole()).isEqualTo(userDto.getRole());
 		assertThat(user.getEmail()).isEqualTo(userDto.getEmail());
-		assertThat(user.isLocked()).isEqualTo(userDto.isLocked());
 		assertThat(user.getId()).isEqualTo(userDto.getId());
 	}
 

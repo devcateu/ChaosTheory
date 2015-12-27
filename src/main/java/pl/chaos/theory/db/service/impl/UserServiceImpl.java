@@ -26,7 +26,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDto getUserByEmail(String email) {
-		return mapper.map(userRepository.findOneByEmail(email), UserDto.class);
+		User oneByEmail = userRepository.findOneByEmail(email);
+		return mapper.map(oneByEmail, UserDto.class);
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String getHashedPassword(String email) {
-		return userRepository.findOneByEmail(email).getEmail();
+		return userRepository.findOneByEmail(email).getPasswordHash();
 	}
 
 	@Override
@@ -55,9 +56,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateLock(UserDto userDto) {
+	public void updateRole(UserDto userDto) {
 		User user = userRepository.findOneByEmail(userDto.getEmail());
-		user.setLocked(userDto.isLocked());
+		user.setRole(userDto.getRole());
 		userRepository.save(user);
 	}
 }

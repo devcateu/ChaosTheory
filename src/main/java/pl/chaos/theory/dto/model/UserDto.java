@@ -6,7 +6,6 @@ public class UserDto extends Dto {
 	private Long id;
 	private String email;
 	private Role role;
-	private boolean locked;
 
 	public Long getId() {
 		return id;
@@ -32,18 +31,9 @@ public class UserDto extends Dto {
 		this.role = role;
 	}
 
-	public boolean isLocked() {
-		return locked;
-	}
-
-	public void setLocked(boolean locked) {
-		this.locked = locked;
-	}
-
 	public void reset() {
 		role = null;
 		email = null;
 		id = null;
-		locked = false;
 	}
 }

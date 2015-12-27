@@ -1,36 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<h:form id="loginFormId" prependId="false">
-    <div class="full-box" style="text-align: center">
-    <div class="child-box box-c3">
-        <h3>Register</h3>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+<ui:composition template="layout.xhtml">
+  <ui:define name="content">
+    <h:form id="loginFormId" prependId="false">
+      <h3>Register</h3>
 
-        <div class="fluid-row">
-            <div class="fluid-column fluid-c12">
-                <div class="forLabel" style="width: 30%">
-                    <h:outputLabel for="username" value="User"/>
-                </div>
-                <div class="forField" style="width: 65%">
-                    <h:inputText id="username" required="true"
-                                 value="#{user.email}"
-                                 requiredMessage="Please enter username (or go to hell...)"/>
-                    <h:messages for="username"/>
-                </div>
-            </div>
-            <ui:include src="/WEB-INF/password.xhtml"/>
-            <ui:fragment rendered="${!empty param['error']}">
-                <div>Connection failed: user and/or password are wrong.</div>
-            </ui:fragment>
+      <h:panelGrid columns="3" cellpadding="5">
+        <p:outputLabel for="username" value="Email"/>
+        <p:inputText id="username" required="true"
+                     value="#{register.user.email}"
+                     requiredMessage="Please enter email">
+          <f:validator binding="#{myEmailValidator}"/>
+          <p:ajax update="messUsername" event="blur"/>
+        </p:inputText>
+        <p:message id="messUsername" for="username"/>
 
-            <div id="loginBtnPanelId">
-                <h:commandButton id="btnLoginId" value="Register" type="submit"
-                                 action="${authenticationManager.register(user, password)}" styleClass="loginPanelBtn"/>
-            </div>
-        </div>
-    </div>
-</h:form>
+        <p:outputLabel for="passwordd" value="Password"/>
+        <p:password id="passwordd" required="true"
+                    value="#{register.password.password}"
+                    requiredMessage="Please enter password"
+                    name="password" feedback="true">
+          <f:validateLength minimum="6"/>
+          <f:ajax event="keyup" execute="passwordd passwordRepeat equal" render="messPassword messPasswordRepeat"/>
+        </p:password>
+        <p:message id="messPassword" for="passwordd" showDetail="true" autoUpdate="true"/>
+
+        <p:outputLabel for="passwordRepeat" value="Repeat Password"/>
+        <p:password id="passwordRepeat" required="true"
+                    value="#{register.password.passwordRepeated}"
+                    requiredMessage="Please repeat password"
+                    name="passwordRepeat">
+          <f:ajax event="keyup" execute="passwordd passwordRepeat equal" render="messPasswordRepeat"/>
+        </p:password>
+        <p:message id="messPasswordRepeat" for="passwordRepeat" showDetail="true" autoUpdate="true"/>
+
+        <o:validateEqual id="equal" components="passwordd passwordRepeat"
+                         message="Passwords are not equal" showMessageFor="passwordRepeat"/>
+      </h:panelGrid>
+
+      <p:commandButton id="btnRegister" value="Register" type="submit" ajax="false" action="${authManager.register(register)}"/>
+    </h:form>
+  </ui:define>
+</ui:composition>
 </html>

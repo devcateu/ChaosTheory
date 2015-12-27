@@ -56,6 +56,7 @@ public class Mapper {
 		MethodSelector selector = new MethodSelector(returnClass, param.getClass());
 		MethodInvoker invoker = map.get(selector);
 		if (invoker == null) {
+			System.out.println("Invoker not found: " + selector);
 			throw new RuntimeException("Invoker not found: " + selector);
 		}
 		return invoker;

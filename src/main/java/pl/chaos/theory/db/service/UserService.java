@@ -19,5 +19,5 @@ public interface UserService {
 
 	Collection<UserDto> getAll();
 
-	void updateLock(UserDto userDto);
+	void updateRole(UserDto userDto);
 }

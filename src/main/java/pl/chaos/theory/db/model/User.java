@@ -18,8 +18,6 @@ public class User extends Model {
 	@Column(name = "role", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
-	@Column(name = "locked", nullable = false)
-	private boolean locked;
 
 	public Long getId() {
 		return id;
@@ -51,13 +49,5 @@ public class User extends Model {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public boolean isLocked() {
-		return locked;
-	}
-
-	public void setLocked(boolean locked) {
-		this.locked = locked;
 	}
 }
