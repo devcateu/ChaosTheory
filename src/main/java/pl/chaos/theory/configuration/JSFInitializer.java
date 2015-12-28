@@ -15,6 +15,7 @@ public class JSFInitializer implements ServletContextInitializer {
 		servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", "true");
 		servletContext.setInitParameter("primefaces.THEME", "le-frog");
 		servletContext.setInitParameter("javax.faces.DEFAULT_SUFFIX", ".xhtml");
+		servletContext.setInitParameter("primefaces.UPLOADER", "commons");
 	}
 
 }

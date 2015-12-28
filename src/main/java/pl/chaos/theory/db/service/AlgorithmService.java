@@ -1,6 +1,6 @@
 package pl.chaos.theory.db.service;
 
-import pl.chaos.theory.dto.model.AlgorithmDto;
+import pl.chaos.theory.algorithm.AlgorithmType;
 import pl.chaos.theory.dto.model.AlgorithmResultDto;
 import pl.chaos.theory.dto.model.ImageDto;
 
@@ -9,11 +9,9 @@ import java.util.Map;
 
 public interface AlgorithmService {
 
-	Collection<AlgorithmDto> getAllAlgorithms();
-
 	Collection<AlgorithmResultDto> getAllResultForUser(Long userId);
 
 	ImageDto getImageById(Long imageId);
 
-	AlgorithmResultDto saveResult(AlgorithmDto algorithmDto, Map<String, Double> parametersMap, ImageDto imageDto);
+	AlgorithmResultDto saveResult(String description, AlgorithmType algorithmType, Map<String, Double> parametersMap, ImageDto imageDto);
 }

@@ -2,7 +2,7 @@ package pl.chaos.theory.algorithm;
 
 import org.apache.commons.csv.CSVRecord;
 
-public class WrongLineInCSVFile extends RuntimeException {
+public class WrongLineInCSVFile extends Exception {
 	private final CSVRecord csvRecord;
 	private final String csv;
 

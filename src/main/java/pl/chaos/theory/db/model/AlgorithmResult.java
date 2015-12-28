@@ -1,5 +1,7 @@
 package pl.chaos.theory.db.model;
 
+import pl.chaos.theory.algorithm.AlgorithmType;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -12,17 +14,15 @@ public class AlgorithmResult extends Model {
 	private Long id;
 	@Column(name = "user_id", nullable = false)
 	private Long userId;
-	@Column(name = "algorithm_id", nullable = false, insertable = false, updatable = false)
-	private Long algorithmId;
 	@Column(name = "image_id", nullable = false)
 	private Long imageId;
 	@Column(name = "description_id", nullable = false)
 	private String description;
-	@ManyToOne
-	@JoinColumn(name = "algorithm_id")
-	private Algorithm algorithm;
-	@OneToMany(mappedBy = "algorithmResultId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "algorithmResult", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Parameter> parameters;
+	@Column(name = "type", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private AlgorithmType algorithmType;
 
 	public Long getId() {
 		return id;
@@ -38,14 +38,6 @@ public class AlgorithmResult extends Model {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
-	}
-
-	public Long getAlgorithmId() {
-		return algorithmId;
-	}
-
-	public void setAlgorithmId(Long algorithmId) {
-		this.algorithmId = algorithmId;
 	}
 
 	public Long getImageId() {
@@ -64,19 +56,19 @@ public class AlgorithmResult extends Model {
 		this.description = description;
 	}
 
-	public Algorithm getAlgorithm() {
-		return algorithm;
-	}
-
-	public void setAlgorithm(Algorithm algorithm) {
-		this.algorithm = algorithm;
-	}
-
 	public Set<Parameter> getParameters() {
 		return parameters;
 	}
 
 	public void setParameters(Set<Parameter> parameters) {
 		this.parameters = parameters;
+	}
+
+	public AlgorithmType getAlgorithmType() {
+		return algorithmType;
+	}
+
+	public void setAlgorithmType(AlgorithmType algorithmType) {
+		this.algorithmType = algorithmType;
 	}
 }

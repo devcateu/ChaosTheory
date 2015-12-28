@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
@@ -38,6 +39,14 @@ public class ChaosTheoryApplication extends SpringBootServletInitializer {
 	public ServletRegistrationBean servletRegistrationBean() {
 		FacesServlet servlet = new FacesServlet();
 		return new ServletRegistrationBean(servlet, "*.jsf");
+	}
+
+	@Bean
+	public FilterRegistrationBean FileUploadFilter() {
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		registration.setFilter(new org.primefaces.webapp.filter.FileUploadFilter());
+		registration.setName("PrimeFaces FileUpload Filter");
+		return registration;
 	}
 
 	@Bean

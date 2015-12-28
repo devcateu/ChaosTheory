@@ -7,7 +7,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class SecurityUtil {
@@ -19,7 +18,6 @@ public class SecurityUtil {
 		}
 
 		List<String> rolesList = Arrays.asList(roles);
-		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (GrantedAuthority auth : authentication.getAuthorities()) {
 			if (rolesList.contains(auth.getAuthority())) {
 				return true;

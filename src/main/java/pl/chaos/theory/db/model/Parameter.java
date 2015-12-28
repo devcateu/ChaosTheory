@@ -5,17 +5,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "parameter")
 public class Parameter extends Model {
+	@ManyToOne
+	@JoinColumn(name = "algorithm_Result_Id", nullable = false)
+	public AlgorithmResult algorithmResult;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
-	@Column(name = "algorithm_result_id", nullable = false)
+	@Column(name = "algorithm_Result_Id", nullable = false, insertable = false, updatable = false)
 	private Long algorithmResultId;
-	@Column(name = "parameter_info_id", nullable = false, insertable = false, updatable = false)
-	private Long parameterInfoId;
-	@ManyToOne
-	@JoinColumn(name = "parameter_info_id")
-	private ParameterInfo parameterInfo;
+	@Column(name = "symbol", nullable = false)
+	private String symbol;
 	@Column(name = "value", nullable = false)
 	private Double value;
 
@@ -27,20 +27,12 @@ public class Parameter extends Model {
 		this.id = id;
 	}
 
-	public Long getParameterInfoId() {
-		return parameterInfoId;
+	public String getSymbol() {
+		return symbol;
 	}
 
-	public void setParameterInfoId(Long parameterInfoId) {
-		this.parameterInfoId = parameterInfoId;
-	}
-
-	public ParameterInfo getParameterInfo() {
-		return parameterInfo;
-	}
-
-	public void setParameterInfo(ParameterInfo parameterInfo) {
-		this.parameterInfo = parameterInfo;
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 
 	public Long getAlgorithmResultId() {
@@ -57,5 +49,13 @@ public class Parameter extends Model {
 
 	public void setValue(Double value) {
 		this.value = value;
+	}
+
+	public AlgorithmResult getAlgorithmResult() {
+		return algorithmResult;
+	}
+
+	public void setAlgorithmResult(AlgorithmResult algorithmResult) {
+		this.algorithmResult = algorithmResult;
 	}
 }

@@ -41,7 +41,11 @@ public class AlgorithmCSVParserTest extends BaseSpringTest {
 
 	@Test
 	public void correctParse_2lines() throws IOException {
-		Map<String, Double> parameterValues = algorithmCSVParser.parse("a,1\nb,2");
+		Map<String, Double> parameterValues = null;
+		try {
+			parameterValues = algorithmCSVParser.parse("a,1\nb,2");
+		} catch (Exception e) {
+		}
 
 		assertThat(parameterValues).containsOnly(new MapEntry[]{MapEntry.entry("a", 1.), MapEntry.entry("b", 2.)});
 	}

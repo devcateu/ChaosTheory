@@ -4,9 +4,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.chaos.theory.BaseSpringTest;
 import pl.chaos.theory.db.model.Parameter;
-import pl.chaos.theory.db.model.ParameterInfo;
 import pl.chaos.theory.dto.model.ParameterDto;
-import pl.chaos.theory.dto.model.ParameterInfoDto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,17 +18,15 @@ public class ParameterMapperTest extends BaseSpringTest {
 		Parameter parameter = new Parameter();
 		parameter.setId(1289L);
 		parameter.setAlgorithmResultId(5313L);
-		parameter.setParameterInfo(new ParameterInfo());
-		parameter.setParameterInfoId(7322L);
 		parameter.setValue(903123.42);
+		parameter.setSymbol("sysyss");
 
 		ParameterDto parameterDto = parameterMapper.mapAtoB(parameter);
 
 		assertThat(parameterDto.getId()).isEqualTo(parameter.getId());
 		assertThat(parameterDto.getValue()).isEqualTo(parameter.getValue());
 		assertThat(parameterDto.getAlgorithmResultId()).isEqualTo(parameter.getAlgorithmResultId());
-		assertThat(parameterDto.getParameterInfoId()).isEqualTo(parameter.getParameterInfoId());
-		assertThat(parameterDto.getParameterInfo()).isNotNull();
+		assertThat(parameterDto.getSymbol()).isEqualTo(parameter.getSymbol());
 	}
 
 	@Test
@@ -38,8 +34,6 @@ public class ParameterMapperTest extends BaseSpringTest {
 		ParameterDto parameterDto = new ParameterDto();
 		parameterDto.setId(1289L);
 		parameterDto.setAlgorithmResultId(5313L);
-		parameterDto.setParameterInfo(new ParameterInfoDto());
-		parameterDto.setParameterInfoId(7322L);
 		parameterDto.setValue(903123.42);
 
 		Parameter parameter = parameterMapper.mapBtoA(parameterDto);
@@ -47,8 +41,6 @@ public class ParameterMapperTest extends BaseSpringTest {
 		assertThat(parameter.getId()).isEqualTo(parameterDto.getId());
 		assertThat(parameter.getValue()).isEqualTo(parameterDto.getValue());
 		assertThat(parameter.getAlgorithmResultId()).isEqualTo(parameterDto.getAlgorithmResultId());
-		assertThat(parameter.getParameterInfoId()).isEqualTo(parameterDto.getParameterInfoId());
-		assertThat(parameter.getParameterInfo()).isNotNull();
-
+		assertThat(parameter.getSymbol()).isEqualTo(parameterDto.getSymbol());
 	}
 }

@@ -1,7 +1,7 @@
 package pl.chaos.theory.db.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import pl.chaos.theory.db.model.User;
 import pl.chaos.theory.db.repository.UserRepository;
 import pl.chaos.theory.db.service.UserService;
@@ -11,7 +11,7 @@ import pl.chaos.theory.util.mapper.Mapper;
 
 import java.util.Collection;
 
-@Service
+@Component
 public class UserServiceImpl implements UserService {
 
 	@Autowired

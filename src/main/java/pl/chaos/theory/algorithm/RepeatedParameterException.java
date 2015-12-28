@@ -1,6 +1,6 @@
 package pl.chaos.theory.algorithm;
 
-public class RepeatedParameterException extends RuntimeException {
+public class RepeatedParameterException extends Exception {
 	private final String symbol;
 	private final Double valueFirst;
 	private final Double valueSecond;

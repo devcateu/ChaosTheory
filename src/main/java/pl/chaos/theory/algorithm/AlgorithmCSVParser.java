@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 public class AlgorithmCSVParser {
 
-	public Map<String, Double> parse(String csv) {
+	public Map<String, Double> parse(String csv) throws ParserException, WrongLineInCSVFile, RepeatedParameterException {
 
 		try {
 			CSVParser csvParser = CSVParser.parse(csv, CSVFormat.RFC4180);
@@ -23,7 +23,7 @@ public class AlgorithmCSVParser {
 		}
 	}
 
-	private Map<String, Double> readLines(String csv, CSVParser csvParser) throws IOException {
+	private Map<String, Double> readLines(String csv, CSVParser csvParser) throws IOException, WrongLineInCSVFile, RepeatedParameterException {
 		Map<String, Double> result = new HashMap<String, Double>();
 		for (CSVRecord csvRecord : csvParser.getRecords()) {
 			readLine(csv, result, csvRecord);
@@ -31,7 +31,7 @@ public class AlgorithmCSVParser {
 		return result;
 	}
 
-	private void readLine(String csv, Map<String, Double> result, CSVRecord csvRecord) {
+	private void readLine(String csv, Map<String, Double> result, CSVRecord csvRecord) throws WrongLineInCSVFile, RepeatedParameterException {
 		if (csvRecord.size() != 2) {
 			throw new WrongLineInCSVFile(csvRecord, csv);
 		}

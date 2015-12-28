@@ -1,9 +1,9 @@
 package pl.chaos.theory.view.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import pl.chaos.theory.db.service.LoggedUserService;
 import pl.chaos.theory.db.service.UserService;
 import pl.chaos.theory.dto.model.PasswordDto;
 import pl.chaos.theory.dto.model.UserDto;
@@ -24,26 +24,23 @@ import java.util.Map;
 @Component("authManager")
 public class AuthenticationManager {
 	private final UserService userService;
+	private final LoggedUserService loggedUserService;
 
 	@Autowired
-	public AuthenticationManager(UserService userService) {
+	public AuthenticationManager(UserService userService, LoggedUserService loggedUserService) {
 		this.userService = userService;
+		this.loggedUserService = loggedUserService;
 	}
 
 	public String changePassword(ChangePasswordView changePasswordView) throws Exception {
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userName = auth.getName();
-
-		String passwordFromDb = userService.getHashedPassword(userName);
 		String oldPassword = changePasswordView.getOldPassword();
+		String newPassword = changePasswordView.getNewPassword().getPassword();
 
-		if (!passwordFromDb.equals(oldPassword)) {
+		if (!loggedUserService.changePassword(oldPassword, newPassword)) {
 			Util.addMessage("oldPassword", FacesMessage.SEVERITY_ERROR, "Wrong old Password.");
 			return null;
 		} else {
-			String newPassword = changePasswordView.getNewPassword().getPassword();
-			userService.changePassword(newPassword, userName);
 			Util.addMessage("indexMessage", FacesMessage.SEVERITY_INFO, "Change Password successful.");
 			return "index";
 		}
@@ -59,8 +56,7 @@ public class AuthenticationManager {
 
 	public String logout() throws IOException, ServletException {
 		SecurityContextHolder.getContext().setAuthentication(null);
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.clear();
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
 		SecurityContextHolder.clearContext();
 		return "index";
 	}

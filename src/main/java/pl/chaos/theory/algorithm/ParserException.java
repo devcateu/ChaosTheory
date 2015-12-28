@@ -1,6 +1,6 @@
 package pl.chaos.theory.algorithm;
 
-public class ParserException extends RuntimeException {
+public class ParserException extends Exception {
 	private final String csv;
 
 	public ParserException(String csv) {
