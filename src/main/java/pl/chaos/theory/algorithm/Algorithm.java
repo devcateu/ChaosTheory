@@ -11,4 +11,6 @@ public interface Algorithm {
 	List<ParameterInfo> parameters();
 
 	AlgorithmInfo getAlgorithmInfo();
+
+	AlgorithmType getAlgorithmType();
 }

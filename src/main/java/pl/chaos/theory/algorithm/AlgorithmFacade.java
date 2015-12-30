@@ -1,15 +1,25 @@
 package pl.chaos.theory.algorithm;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.chaos.theory.algorithm.validation.RangeValidator;
 import pl.chaos.theory.dto.model.ImageDto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Component
 public class AlgorithmFacade {
+	private Map<AlgorithmType, Algorithm> algorithmMap = new HashMap<AlgorithmType, Algorithm>();
+
+	@Autowired
+	public AlgorithmFacade(List<Algorithm> algorithms) {
+		for (Algorithm algorithm : algorithms) {
+			algorithmMap.put(algorithm.getAlgorithmType(), algorithm);
+		}
+	}
+
 	public ImageDto calculate(AlgorithmType algorithm, Map<String, Double> parameters) {
 		return getAlgorithmImplFor(algorithm).calculate(parameters);
 	}
@@ -30,29 +40,7 @@ public class AlgorithmFacade {
 		return getAlgorithmImplFor(algorithmType).getAlgorithmInfo();
 	}
 
-	private Algorithm getAlgorithmImplFor(final AlgorithmType algorithm) {
-		return new Algorithm() {
-			@Override
-			public ImageDto calculate(Map<String, Double> parameters) {
-				return new ImageDto();
-			}
-
-			@Override
-			public List<ParameterInfo> parameters() {
-				ArrayList<ParameterInfo> parameterInfos = new ArrayList<ParameterInfo>();
-				parameterInfos.add(new ParameterInfo(new RangeValidator(3, 10), "x", "jol"));
-				if (algorithm == AlgorithmType.CHAOS_NUMBER_GENERATOR) {
-					parameterInfos.add(new ParameterInfo(new RangeValidator(5, 100), "z", "jol"));
-				} else {
-					parameterInfos.add(new ParameterInfo(new RangeValidator(0, 3), "m", "jol"));
-				}
-				return parameterInfos;
-			}
-
-			@Override
-			public AlgorithmInfo getAlgorithmInfo() {
-				return new AlgorithmInfo(algorithm.name(), "deeees", algorithm);
-			}
-		};
+	private Algorithm getAlgorithmImplFor(final AlgorithmType algorithmType) {
+		return algorithmMap.get(algorithmType);
 	}
 }
