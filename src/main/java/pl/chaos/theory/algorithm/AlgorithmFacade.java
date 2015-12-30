@@ -30,8 +30,8 @@ public class AlgorithmFacade {
 
 	public List<AlgorithmInfo> getInfoAboutAllAlgorithm() {
 		ArrayList<AlgorithmInfo> algorithmInfos = new ArrayList<AlgorithmInfo>();
-		for (AlgorithmType algorithmType : AlgorithmType.values()) {
-			algorithmInfos.add(getAlgorithmImplFor(algorithmType).getAlgorithmInfo());
+		for (Algorithm algorithm : algorithmMap.values()) {
+			algorithmInfos.add(algorithm.getAlgorithmInfo());
 		}
 		return algorithmInfos;
 	}

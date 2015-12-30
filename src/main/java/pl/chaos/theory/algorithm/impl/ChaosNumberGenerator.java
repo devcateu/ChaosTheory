@@ -1,5 +1,6 @@
 package pl.chaos.theory.algorithm.impl;
 
+import org.springframework.stereotype.Component;
 import pl.chaos.theory.algorithm.Algorithm;
 import pl.chaos.theory.algorithm.AlgorithmInfo;
 import pl.chaos.theory.algorithm.AlgorithmType;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 //TODO : implemnt it
+@Component
 public class ChaosNumberGenerator implements Algorithm {
 	private final static AlgorithmType algorithmType = AlgorithmType.CHAOS_NUMBER_GENERATOR;
 
