@@ -1,3 +1,6 @@
+xcopy /s/z "src\main\webapp" "src\main\resources\META-INF\resources\" /Y
+xcopy /s/z "src\main\webapp\WEB-INF" "src\main\resources\META-INF\" /Y
+
 @REM ----------------------------------------------------------------------------
 @REM Licensed to the Apache Software Foundation (ASF) under one
 @REM or more contributor license agreements.  See the NOTICE file

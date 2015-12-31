@@ -1,4 +1,6 @@
+/classes/artifacts/ChaosTheory_jar/ChaosTheory.jar
 /target/
 *.iml
 .idea
 .mvn
+/classes/
