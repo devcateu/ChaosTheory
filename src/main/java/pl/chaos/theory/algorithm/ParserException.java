@@ -1,5 +1,8 @@
 package pl.chaos.theory.algorithm;
 
+/**
+ * Exception which was throw during parsing csv file.
+ */
 public class ParserException extends Exception {
 	private final String csv;
 

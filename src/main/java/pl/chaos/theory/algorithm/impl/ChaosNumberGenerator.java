@@ -14,6 +14,9 @@ import java.util.Map;
 
 //TODO : implemnt it
 @Component
+/**
+ * Implementation of Chaos Number Generation Algorithm.
+ */
 public class ChaosNumberGenerator implements Algorithm {
 	private final static AlgorithmType algorithmType = AlgorithmType.CHAOS_NUMBER_GENERATOR;
 

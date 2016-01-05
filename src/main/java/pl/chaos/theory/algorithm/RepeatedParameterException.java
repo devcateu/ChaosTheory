@@ -1,5 +1,8 @@
 package pl.chaos.theory.algorithm;
 
+/**
+ * Exception which was throw when some parameter in csv file is repeated.
+ */
 public class RepeatedParameterException extends Exception {
 	private final String symbol;
 	private final Double valueFirst;

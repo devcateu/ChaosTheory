@@ -20,14 +20,30 @@ public class AlgorithmFacade {
 		}
 	}
 
+	/**
+	 * Make calculation for selected algorithm and parameters.
+	 *
+	 * @param algorithm  selected algorithm.
+	 * @param parameters input parameters for algorithm
+	 * @return Calculation result - Image.
+	 */
 	public ImageDto calculate(AlgorithmType algorithm, Map<String, Double> parameters) {
 		return getAlgorithmImplFor(algorithm).calculate(parameters);
 	}
 
+	/**
+	 * Return list of required parameter for selected algorithm.
+	 * @param algorithmType algorithm.
+	 * @return List of parameters for algorithm.
+	 */
 	public List<ParameterInfo> getParameters(AlgorithmType algorithmType) {
 		return getAlgorithmImplFor(algorithmType).parameters();
 	}
 
+	/**
+	 * Return list of Information about algorithms.
+	 * @return List of Information about algorithms.
+	 */
 	public List<AlgorithmInfo> getInfoAboutAllAlgorithm() {
 		ArrayList<AlgorithmInfo> algorithmInfos = new ArrayList<AlgorithmInfo>();
 		for (Algorithm algorithm : algorithmMap.values()) {
@@ -36,6 +52,11 @@ public class AlgorithmFacade {
 		return algorithmInfos;
 	}
 
+	/**
+	 * Return information about selected algorithm.
+	 * @param algorithmType selected algorithm.
+	 * @return Information about algorithm.
+	 */
 	public AlgorithmInfo getAlgorithmInfo(AlgorithmType algorithmType) {
 		return getAlgorithmImplFor(algorithmType).getAlgorithmInfo();
 	}

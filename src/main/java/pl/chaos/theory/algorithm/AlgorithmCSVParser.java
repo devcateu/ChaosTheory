@@ -9,10 +9,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-//TODO test it
 @Component
+/**
+ * Parse csv file into parameter symbol - value map.
+ */
 public class AlgorithmCSVParser {
 
+	/**
+	 * Parse csv file into symbol of parameter - value map.
+	 *
+	 * @param csv Input file to parse.
+	 * @return Parsed map(symbol - value).
+	 * @throws ParserException            Throw when error in parsing CSV file.
+	 * @throws WrongLineInCSVFile         Throw when some line in csv is wrong number of parameters.
+	 * @throws RepeatedParameterException Throw when some parameter is repeated in csv file
+	 */
 	public Map<String, Double> parse(String csv) throws ParserException, WrongLineInCSVFile, RepeatedParameterException {
 
 		try {

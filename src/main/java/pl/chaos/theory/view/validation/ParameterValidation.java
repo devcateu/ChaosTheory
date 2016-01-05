@@ -25,7 +25,7 @@ public class ParameterValidation implements Validator {
 		Map<String, Double> allParams = (Map<String, Double>) attributes.get("allParams");
 		ParameterInfo algorithmParameter = (ParameterInfo) attributes.get("algorithmParameter");
 
-		ParameterValidator parameterValidator = algorithmParameter.getValidation();
+		ParameterValidator parameterValidator = algorithmParameter.getValidator();
 
 		if (!parameterValidator.validate(input, algorithmParameter, Collections.unmodifiableMap(allParams))) {
 			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Validation Error", parameterValidator.errorMessage(input)));

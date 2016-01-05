@@ -1,5 +1,8 @@
 package pl.chaos.theory.algorithm;
 
+/**
+ * Info about Algorithm.
+ */
 public class AlgorithmInfo {
 	private String name;
 	private String description;

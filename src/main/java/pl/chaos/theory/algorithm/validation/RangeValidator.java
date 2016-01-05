@@ -5,6 +5,9 @@ import pl.chaos.theory.algorithm.ParameterValidator;
 
 import java.util.Map;
 
+/**
+ * Implementation of Parameter validator for selected range.
+ */
 public class RangeValidator implements ParameterValidator {
 	private final double minimum;
 	private final double maximum;

@@ -8,6 +8,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:sec="http://www.springframework.org/security/tags">
 <ui:composition template="layout.xhtml">
+  <ui:define name="title">Login</ui:define>
+
   <ui:define name="content">
 
     <f:event type="preRenderView" listener="#{authManager.redirect()}"/>

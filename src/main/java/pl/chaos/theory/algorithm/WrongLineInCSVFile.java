@@ -2,6 +2,9 @@ package pl.chaos.theory.algorithm;
 
 import org.apache.commons.csv.CSVRecord;
 
+/**
+ * Exception which was throw when is wrong number of information in line.
+ */
 public class WrongLineInCSVFile extends Exception {
 	private final CSVRecord csvRecord;
 	private final String csv;

@@ -14,6 +14,9 @@ import java.util.Map;
 
 //TODO : implemnt it
 @Component
+/**
+ * Implementation of Population Growth Algorithm.
+ */
 public class PopulationGrowth implements Algorithm {
 	private final static AlgorithmType algorithmType = AlgorithmType.POPULATION_GROWTH;
 
