@@ -20,6 +20,9 @@ import java.util.Map;
 import java.util.Set;
 
 @Component
+/**
+ * Implementation of AlgorithmService
+ */
 public class AlgorithmServiceImpl implements AlgorithmService {
 
 	@Autowired

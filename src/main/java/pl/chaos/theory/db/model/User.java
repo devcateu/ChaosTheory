@@ -6,6 +6,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
+/**
+ * DB Model of user.
+ */
 public class User extends Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

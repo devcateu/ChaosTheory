@@ -11,17 +11,15 @@ import pl.chaos.theory.util.mapper.Mapper;
 import java.util.Collection;
 
 @Component
+/**
+ * Implementation of UserService
+ */
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
 	@Autowired
 	private Mapper mapper;
-
-	@Override
-	public UserDto getUserById(long id) {
-		return mapper.map(userRepository.findOne(id), UserDto.class);
-	}
 
 	@Override
 	public UserDto getUserByEmail(String email) {

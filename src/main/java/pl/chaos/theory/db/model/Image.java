@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "image")
+/**
+ * DB Model of image.
+ */
 public class Image extends Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

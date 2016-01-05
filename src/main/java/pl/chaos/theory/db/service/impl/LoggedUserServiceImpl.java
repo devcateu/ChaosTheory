@@ -10,6 +10,9 @@ import pl.chaos.theory.dto.model.UserDto;
 import pl.chaos.theory.security.CurrentUser;
 
 @Component
+/**
+ * Implementation of LoggedUserService
+ */
 public class LoggedUserServiceImpl implements LoggedUserService {
 
 	@Autowired

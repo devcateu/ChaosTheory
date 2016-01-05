@@ -7,6 +7,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "algorithm_result")
+/**
+ * DB Model of algorithm result.
+ */
 public class AlgorithmResult extends Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

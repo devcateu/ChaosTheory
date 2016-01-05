@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "parameter")
+/**
+ * DB Model of parameter putted into algorithm as param.
+ */
 public class Parameter extends Model {
 	@ManyToOne
 	@JoinColumn(name = "algorithm_Result_Id", nullable = false)
