@@ -1,5 +1,8 @@
 package pl.chaos.theory.util.mapper;
 
+/**
+ * Base class for all mappers implementation.
+ */
 public abstract class BaseMapper<A, B> {
 	protected Mapper mapper;
 

@@ -19,14 +19,16 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 @Configuration
+/**
+ * Configuration of JSF.
+ * Move all possible element from web.xml and faces-config.xml into it. Thanks that we have more control over it and don`t use awful xml.
+ */
 public class JSFInitializer implements ServletContextAware, ServletContextInitializer {
 
 	private final static String facesServlet = "Faces Servlet";
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		System.err.println("------------------------------------");
-		//super.onStartup(servletContext);
 		servletContext.setInitParameter("primefaces.CLIENT_SIDE_VALIDATION", "true");
 		servletContext.setInitParameter("primefaces.THEME", "le-frog");
 		servletContext.setInitParameter("javax.faces.DEFAULT_SUFFIX", ".xhtml");

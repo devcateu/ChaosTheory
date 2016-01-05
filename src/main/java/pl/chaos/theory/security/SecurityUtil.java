@@ -9,8 +9,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Util class for security.
+ */
 public class SecurityUtil {
 
+	/**
+	 * Return information, that current user have any of roles.
+	 *
+	 * @param roles Checking roles.
+	 * @return true - if current logged user has one of specific role, otherwise false.
+	 */
 	public static boolean hasRole(String... roles) {
 		Authentication authentication = getAuthentication();
 		if (authentication == null) {
@@ -32,6 +41,10 @@ public class SecurityUtil {
 		return authentication == null || !(authentication instanceof AnonymousAuthenticationToken);
 	}
 
+	/**
+	 * Get information that current user is logged.
+	 * @return true - if current user is logged, otherwise false.
+	 */
 	private static Authentication getAuthentication() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context == null) {

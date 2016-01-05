@@ -6,6 +6,9 @@ import pl.chaos.theory.util.Util;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Dto represent Algorithm Result with all needed parameters
+ */
 public class AlgorithmResultDto extends Dto {
 	private final Set<ParameterDto> parameters = new HashSet<ParameterDto>();
 	private Long userId;

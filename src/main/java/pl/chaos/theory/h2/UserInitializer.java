@@ -5,13 +5,16 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import pl.chaos.theory.configuration.Profiles;
+import pl.chaos.theory.Profiles;
 import pl.chaos.theory.db.model.User;
 import pl.chaos.theory.db.repository.UserRepository;
 import pl.chaos.theory.security.Role;
 
 @Component
 @Profile(value = Profiles.H2)
+/**
+ * Initialize Users in DB when current profile is H2.
+ */
 public class UserInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
 	private static boolean started = false;

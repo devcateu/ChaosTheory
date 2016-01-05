@@ -6,6 +6,9 @@ import pl.chaos.theory.dto.model.ImageDto;
 import pl.chaos.theory.util.mapper.BaseMapper;
 
 @Component
+/**
+ * Allow map object from Image into ImageDto and vice versa.
+ */
 public class ImageMapper extends BaseMapper<Image, ImageDto> {
 
 	@Override

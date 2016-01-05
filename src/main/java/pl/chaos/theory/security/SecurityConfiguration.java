@@ -13,6 +13,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+/**
+ * Configuration of Spring Security.
+ */
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired

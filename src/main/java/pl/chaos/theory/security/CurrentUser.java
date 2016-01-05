@@ -1,9 +1,13 @@
 package pl.chaos.theory.security;
 
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
 import pl.chaos.theory.dto.model.UserDto;
 
-public class CurrentUser extends org.springframework.security.core.userdetails.User {
+/**
+ * Own implementation of Spring Security User, Allow check instance during logging into system.
+ */
+public class CurrentUser extends User {
 
 	private UserDto user;
 

@@ -2,6 +2,9 @@ package pl.chaos.theory.dto.model;
 
 import pl.chaos.theory.security.Role;
 
+/**
+ * Dto represent User with all needed parameters
+ */
 public class UserDto extends Dto {
 	private String email;
 	private Role role;

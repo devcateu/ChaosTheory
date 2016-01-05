@@ -1,5 +1,8 @@
 package pl.chaos.theory.util.mapper;
 
+/**
+ * Util class allow comparing to the same class. Thanks that allow select specific invoker for specific classes.
+ */
 class MethodSelector {
 	private final Class returnClass;
 	private final Class parameterClass;

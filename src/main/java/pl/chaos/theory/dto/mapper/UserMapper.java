@@ -6,6 +6,9 @@ import pl.chaos.theory.dto.model.UserDto;
 import pl.chaos.theory.util.mapper.BaseMapper;
 
 @Component
+/**
+ * Allow map object from User into UserDto and vice versa.
+ */
 public class UserMapper extends BaseMapper<User, UserDto> {
 
 	@Override

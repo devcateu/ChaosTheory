@@ -8,6 +8,9 @@ import pl.chaos.theory.dto.model.ParameterDto;
 import pl.chaos.theory.util.mapper.BaseMapper;
 
 @Component
+/**
+ * Allow map object from AlgorithmResult into AlgorithmResultDto and vice versa.
+ */
 public class AlgorithmResultMapper extends BaseMapper<AlgorithmResult, AlgorithmResultDto> {
 
 	@Override

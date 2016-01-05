@@ -1,5 +1,8 @@
 package pl.chaos.theory.dto.model;
 
+/**
+ * Dto represent Parameter with all needed parameters.
+ */
 public class ParameterDto extends Dto {
 	private Long algorithmResultId;
 	private Double value;

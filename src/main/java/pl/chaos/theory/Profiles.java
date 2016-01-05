@@ -1,5 +1,8 @@
-package pl.chaos.theory.configuration;
+package pl.chaos.theory;
 
+/**
+ * Contains fields of profiles in current system.
+ */
 public interface Profiles {
 	String DEVELOPMENT = "development";
 	String TEST = "test";

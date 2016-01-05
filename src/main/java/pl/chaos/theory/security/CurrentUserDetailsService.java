@@ -11,6 +11,9 @@ import pl.chaos.theory.dto.model.UserDto;
 
 @Component
 @Service
+/**
+ * Allow Spring security to load user during logging into system.
+ */
 public class CurrentUserDetailsService implements UserDetailsService {
 	private final UserService userService;
 

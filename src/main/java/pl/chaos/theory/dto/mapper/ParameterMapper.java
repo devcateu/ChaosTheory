@@ -6,6 +6,9 @@ import pl.chaos.theory.dto.model.ParameterDto;
 import pl.chaos.theory.util.mapper.BaseMapper;
 
 @Component
+/**
+ * Allow map object from Parameter into ParameterDto and vice versa.
+ */
 public class ParameterMapper extends BaseMapper<Parameter, ParameterDto> {
 
 	@Override

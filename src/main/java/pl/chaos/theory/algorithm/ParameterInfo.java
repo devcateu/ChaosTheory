@@ -23,7 +23,8 @@ public class ParameterInfo {
 		return description;
 	}
 
-	@Override public String toString() {
+	@Override
+	public String toString() {
 		return "ParameterInfo{" +
 				"validation=" + validation +
 				", symbol='" + symbol + '\'' +

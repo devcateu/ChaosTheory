@@ -2,6 +2,9 @@ package pl.chaos.theory.util.mapper;
 
 import java.lang.reflect.Method;
 
+/**
+ * Invoke specific method with parameters.
+ */
 class MethodInvoker {
 	private final Object object;
 	private final Method method;
