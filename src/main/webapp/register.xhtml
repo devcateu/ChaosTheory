@@ -15,16 +15,16 @@
       <h:panelGrid columns="3" cellpadding="5">
         <p:outputLabel for="username" value="Email"/>
         <p:inputText id="username" required="true"
-                     value="#{register.user.email}"
+                     value="#{register.email}"
                      requiredMessage="Please enter email">
-          <f:validator binding="#{myEmailValidator}"/>
+          <f:validator binding="#{emailValidator}"/>
           <p:ajax update="messUsername" event="blur"/>
         </p:inputText>
         <p:message id="messUsername" for="username"/>
 
         <p:outputLabel for="passwordd" value="Password"/>
         <p:password id="passwordd" required="true"
-                    value="#{register.password.password}"
+                    value="#{register.password}"
                     requiredMessage="Please enter password"
                     name="password" feedback="true">
           <f:validateLength minimum="6"/>
@@ -34,7 +34,7 @@
 
         <p:outputLabel for="passwordRepeat" value="Repeat Password"/>
         <p:password id="passwordRepeat" required="true"
-                    value="#{register.password.passwordRepeated}"
+                    value="#{passwordRepeated}"
                     requiredMessage="Please repeat password"
                     name="passwordRepeat">
           <f:ajax event="keyup" execute="passwordd passwordRepeat equal" render="messPasswordRepeat"/>

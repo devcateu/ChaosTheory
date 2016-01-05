@@ -42,6 +42,11 @@ public class AlgorithmServiceImpl implements AlgorithmService {
 	}
 
 	@Override
+	public AlgorithmResultDto getResultById(Long id) {
+		return mapper.map(algorithmResultRepository.getOne(id), AlgorithmResultDto.class);
+	}
+
+	@Override
 	public AlgorithmResultDto saveResult(String description, AlgorithmType algorithmType, Map<String, Double> parametersMap, ImageDto imageDto) {
 		Image image = mapper.map(imageDto, Image.class);
 		image = imageRepository.save(image);

@@ -1,18 +1,9 @@
 package pl.chaos.theory.dto.model;
 
 public class ParameterDto extends Dto {
-	private Long id;
 	private Long algorithmResultId;
 	private Double value;
 	private String symbol;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Long getAlgorithmResultId() {
 		return algorithmResultId;

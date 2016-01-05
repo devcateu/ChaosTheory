@@ -1,6 +1,5 @@
 package pl.chaos.theory.db.service;
 
-import pl.chaos.theory.dto.model.PasswordDto;
 import pl.chaos.theory.dto.model.UserDto;
 
 import java.util.Collection;
@@ -11,7 +10,7 @@ public interface UserService {
 
 	UserDto getUserByEmail(String email);
 
-	UserDto create(PasswordDto passwordDto, UserDto userDto);
+	UserDto create(UserDto userDto, String password);
 
 	String getHashedPassword(String email);
 

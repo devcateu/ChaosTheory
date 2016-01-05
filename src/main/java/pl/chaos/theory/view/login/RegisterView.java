@@ -1,29 +1,30 @@
 package pl.chaos.theory.view.login;
 
 import org.springframework.stereotype.Component;
-import pl.chaos.theory.dto.model.PasswordDto;
-import pl.chaos.theory.dto.model.UserDto;
 import pl.chaos.theory.util.Request;
 
 @Component("register")
 @Request
+/**
+ * Contains parameters required to register.
+ */
 public class RegisterView {
-	private UserDto user = new UserDto();
-	private PasswordDto password = new PasswordDto();
+	private String email;
+	private String password;
 
-	public UserDto getUser() {
-		return user;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUser(UserDto user) {
-		this.user = user;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public PasswordDto getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(PasswordDto password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 }

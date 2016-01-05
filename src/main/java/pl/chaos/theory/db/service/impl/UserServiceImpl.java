@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import pl.chaos.theory.db.model.User;
 import pl.chaos.theory.db.repository.UserRepository;
 import pl.chaos.theory.db.service.UserService;
-import pl.chaos.theory.dto.model.PasswordDto;
 import pl.chaos.theory.dto.model.UserDto;
 import pl.chaos.theory.util.mapper.Mapper;
 
@@ -31,9 +30,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserDto create(PasswordDto passwordDto, UserDto userDto) {
+	public UserDto create(UserDto userDto, String password) {
 		User user = mapper.map(userDto, User.class);
-		user.setPasswordHash(passwordDto.getPassword());
+		user.setPasswordHash(password);
 		user = userRepository.save(user);
 		return mapper.map(user, UserDto.class);
 	}

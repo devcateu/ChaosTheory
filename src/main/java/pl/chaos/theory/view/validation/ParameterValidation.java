@@ -16,6 +16,7 @@ import java.util.Map;
 @Component("parameterValidation")
 @Request
 public class ParameterValidation implements Validator {
+
 	@Override
 	public void validate(FacesContext facesContext, UIComponent uiComponent, Object o) throws ValidatorException {
 		Double input = (Double) o;

@@ -13,5 +13,7 @@ public interface AlgorithmService {
 
 	ImageDto getImageById(Long imageId);
 
+	AlgorithmResultDto getResultById(Long id);
+
 	AlgorithmResultDto saveResult(String description, AlgorithmType algorithmType, Map<String, Double> parametersMap, ImageDto imageDto);
 }

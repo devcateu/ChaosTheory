@@ -5,6 +5,9 @@ import pl.chaos.theory.util.Request;
 
 @Component("login")
 @Request
+/**
+ * Contains parameters required to log into system.
+ */
 public class LoginView {
 	private String password;
 	private String email;

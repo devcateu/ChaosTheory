@@ -1,20 +1,22 @@
 package pl.chaos.theory.view.login;
 
 import org.springframework.stereotype.Component;
-import pl.chaos.theory.dto.model.PasswordDto;
 import pl.chaos.theory.util.Request;
 
 @Component("changePassword")
 @Request
+/**
+ * Contains parameters required to change password.
+ */
 public class ChangePasswordView {
-	private PasswordDto newPassword = new PasswordDto();
+	private String newPassword;
 	private String oldPassword;
 
-	public PasswordDto getNewPassword() {
+	public String getNewPassword() {
 		return newPassword;
 	}
 
-	public void setNewPassword(PasswordDto newPassword) {
+	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
 

@@ -10,7 +10,6 @@ import pl.chaos.theory.util.Util;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -19,6 +18,9 @@ import java.util.Map;
 
 @ViewScoped
 @Component("algorithm")
+/**
+ * Represent parameters needed to new calculate.
+ */
 public class AlgorithmView {
 	private final Map<String, Double> inputParams = new HashMap<String, Double>();
 	private AlgorithmInfo selectedAlgorithm;
@@ -48,13 +50,17 @@ public class AlgorithmView {
 		return inputParams;
 	}
 
-	public void handleFileUpload(FileUploadEvent event) throws IOException {
-
-		InputStream inputStream = event.getFile().getInputstream();
-		String csvFromFile = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-		Map<String, Double> parametersMap = null;
+	/**
+	 * Parse CSV file and put parameters from it into current inputParams. Before putted clear inputParams Map.
+	 * Error during processing will show on UI.
+	 *
+	 * @param event Event which contains uploaded file.
+	 */
+	public void handleFileUpload(FileUploadEvent event) {
 		try {
-			parametersMap = algorithmCSVParser.parse(csvFromFile);
+			InputStream inputStream = event.getFile().getInputstream();
+			String csvFromFile = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+			Map<String, Double> parametersMap = algorithmCSVParser.parse(csvFromFile);
 			inputParams.clear();
 			inputParams.putAll(parametersMap);
 		} catch (Exception e) {

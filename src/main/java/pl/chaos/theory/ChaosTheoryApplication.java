@@ -11,6 +11,9 @@ import pl.chaos.theory.security.SecurityConfiguration;
 
 @SpringBootApplication
 @Import({H2Console.class, SecurityConfiguration.class})
+/**
+ * Main application class, start application server and configure Spring context.
+ */
 public class ChaosTheoryApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

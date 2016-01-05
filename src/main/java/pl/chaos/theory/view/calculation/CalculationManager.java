@@ -17,8 +17,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-//TODO check it
 @Component("calculationManager")
+/**
+ * Responsible for all allow operation in UI connected with calculation and algorithm.
+ */
 public class CalculationManager {
 
 	private final AlgorithmFacade algorithmFacade;
@@ -32,6 +34,12 @@ public class CalculationManager {
 		this.loggedUserService = loggedUserService;
 	}
 
+	/**
+	 * Calculate selected algorithm for putted parameters.
+	 *
+	 * @param algorithmView Selected algorithm and parameter needed to calculate result.
+	 * @return Path to result page with id for result.
+	 */
 	public String calculate(AlgorithmView algorithmView) {
 		AlgorithmType algorithmType = algorithmView.getSelectedAlgorithm().getAlgorithmType();
 		Map<String, Double> parameters = algorithmView.getInputParams();
@@ -40,35 +48,63 @@ public class CalculationManager {
 		return "/result.jsf?faces-redirect=true&id=" + algorithmResultDto.getId();
 	}
 
+	/**
+	 * Return info about allow algorithm in the system.
+	 * @return List of allow algorithms.
+	 */
 	public List<AlgorithmInfo> getAllAlgorithms() {
-		List<AlgorithmInfo> infoAboutAllAlgorithm = null;
-		if (infoAboutAllAlgorithm == null) {
-			infoAboutAllAlgorithm = algorithmFacade.getInfoAboutAllAlgorithm();
-		}
-		return infoAboutAllAlgorithm;
+		return algorithmFacade.getInfoAboutAllAlgorithm();
 	}
 
-	public Collection<ParameterInfo> getParameters(AlgorithmView algorithmInfo) {
-		if (algorithmInfo == null) {
+	/**
+	 * Return list of parameters for selected algorithm.
+	 *
+	 * @param algorithmView Contains selected algorithm.
+	 * @return List of parameters for selected algorithm, when algorithm is not selected return empty list.
+	 */
+	public Collection<ParameterInfo> getParameters(AlgorithmView algorithmView) {
+		if (algorithmView == null) {
 			return new ArrayList<ParameterInfo>();
 		}
-		return getParameters(algorithmInfo.getSelectedAlgorithm());
+		return getParameters(algorithmView.getSelectedAlgorithm());
 	}
 
-	public Collection<ParameterInfo> getParameters(AlgorithmInfo algorithmInfo) {
+	/**
+	 * Return list of parameters for selected algorithm.
+	 *
+	 * @param algorithmInfo Selected algorithm.
+	 * @return List of parameters for selected algorithm, when algorithm is not selected return empty list.
+	 */
+	private Collection<ParameterInfo> getParameters(AlgorithmInfo algorithmInfo) {
 		if (algorithmInfo == null) {
 			return new ArrayList<ParameterInfo>();
 		}
 		return algorithmFacade.getParameters(algorithmInfo.getAlgorithmType());
 	}
 
+	/**
+	 * Return all results of algorithm for current logged user.
+	 * @return Collection of all results of algorithm for current logged user.
+	 */
 	public Collection<AlgorithmResultDto> getAllAlgorithmResultForUser() {
 		UserDto userDto = loggedUserService.getCurrentUser();
 		return algorithmService.getAllResultForUser(userDto.getId());
 	}
 
-	public ImageDto getImageById(Long imageId) {
-		return algorithmService.getImageById(imageId);
+	/**
+	 * Get full information about selected calculation.
+	 *
+	 * @param resultId Selected calculation id.
+	 * @return Information about selected calculation.
+	 */
+	public ResultView getResultById(Long resultId) {
+		ResultView resultView = new ResultView();
+		AlgorithmResultDto result = algorithmService.getResultById(resultId);
+		if (result != null) {
+			resultView.setAlgorithmResult(result);
+			ImageDto image = algorithmService.getImageById(result.getImageId());
+			resultView.setImage(image);
+		}
+		return resultView;
 	}
-
 }

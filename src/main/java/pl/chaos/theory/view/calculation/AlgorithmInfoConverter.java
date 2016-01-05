@@ -15,6 +15,9 @@ import javax.faces.convert.ConverterException;
 
 @Component("algorithmInfoConverter")
 @Scope(WebApplicationContext.SCOPE_SESSION)
+/**
+ * JSF converter, allow to show AlgorithmInfo in drop down menu.
+ */
 public class AlgorithmInfoConverter implements Converter {
 
 	@Autowired

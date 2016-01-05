@@ -13,6 +13,9 @@ import java.util.List;
 
 @Component("adminManager")
 @ViewScoped
+/**
+ * Contains all operation allowed only for admin.
+ */
 public class AdminManager {
 
 	private final UserService userService;
@@ -23,6 +26,11 @@ public class AdminManager {
 		this.userService = userService;
 	}
 
+	/**
+	 * Return list of all users registered in system.
+	 *
+	 * @return List of all users registered in system
+	 */
 	public List<UserDto> getAllUsers() {
 		if (allUsers == null) {
 			allUsers = new ArrayList<UserDto>(userService.getAll());
@@ -30,10 +38,18 @@ public class AdminManager {
 		return allUsers;
 	}
 
+	/**
+	 * Save changed role for selected user.
+	 * @param userDto Selected user for which should be role updated.
+	 */
 	public void saveChangeRole(UserDto userDto) {
 		userService.updateRole(userDto);
 	}
 
+	/**
+	 * Return list of allowed Role.
+	 * @return List of allowed Role.
+	 */
 	public List<Role> getRoles() {
 		return Arrays.asList(Role.values());
 	}

@@ -10,8 +10,11 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import java.util.regex.Pattern;
 
-@Component("myEmailValidator")
+@Component("emailValidator")
 @Request
+/**
+ * JSF validator, validate that email in Input field is correct.
+ */
 public class EmailValidator implements Validator {
 
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
