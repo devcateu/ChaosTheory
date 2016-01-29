@@ -12,6 +12,8 @@ public class Image extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
+	@Column(name = "image")
+	private byte[] imageBytes;
 
 	public Long getId() {
 		return id;
@@ -19,5 +21,13 @@ public class Image extends Model {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public byte[] getImageBytes() {
+		return imageBytes;
+	}
+
+	public void setImageBytes(byte[] imageBytes) {
+		this.imageBytes = imageBytes;
 	}
 }
