@@ -2,16 +2,15 @@ spring:
   application:
     name: Chaos Theory
   profiles:
-    active: development
+   active: development
 
 server:
   port: 9090
 ---
 
 spring:
-  profiles:
-    active: development
-    include: h2
+  profiles: development
+  profiles.include: h2
 
 
 servlet:
@@ -25,9 +24,8 @@ security:
 ---
 
 spring:
-  profiles:
-    active: test
-    include: h2
+  profiles: test
+  profiles.include: h2
 
 ---
 
