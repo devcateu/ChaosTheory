@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
 //TODO : implemnt it
 @Component
 /**
@@ -22,20 +23,35 @@ public class PopulationGrowth implements Algorithm {
 
 	@Override
 	public ImageDto calculate(Map<String, Double> parameters) {
-		return new ImageDto();
+            LotkaVolterraModel model = new LotkaVolterraModel(parameters.get("x"),
+                    parameters.get("y"), parameters.get("t"), parameters.get("a"),
+                    parameters.get("b"), parameters.get("c"), parameters.get("d"));
+            RungeKutta rk = new RungeKutta(model, parameters.get("time") * 10);
+            List<LotkaVolterraResult> results = new ArrayList<LotkaVolterraResult>();
+            results = rk.solve();
+            
+   
+            return new ImageDto();
 	}
 
 	@Override
 	public List<ParameterInfo> parameters() {
 		ArrayList<ParameterInfo> parameterInfos = new ArrayList<ParameterInfo>();
-		parameterInfos.add(new ParameterInfo(new RangeValidator(3, 10), "x", "jol"));
-		parameterInfos.add(new ParameterInfo(new RangeValidator(0, 3), "m", "jol"));
+		parameterInfos.add(new ParameterInfo(new RangeValidator(1, 1000), "x", "Initial populations of prey"));
+		parameterInfos.add(new ParameterInfo(new RangeValidator(1, 1000), "y", "Initial populations of predators"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(1, 100), "t", "Start time of simulation"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(1, 1000), "time", "Time of simulation"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "a", "Birth rate of prey"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "b", "Mortality rate of prey"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "c", "Birth rate of predators"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "d", "Mortality rate of prey"));
 		return parameterInfos;
 	}
 
 	@Override
 	public AlgorithmInfo getAlgorithmInfo() {
-		return new AlgorithmInfo(algorithmType.name(), "deeees", algorithmType);
+		return new AlgorithmInfo(algorithmType.name(), 
+                        "Algorithm describes the dynamics of bilogical system in witch two species interact.", algorithmType);
 	}
 
 	@Override public AlgorithmType getAlgorithmType() {
