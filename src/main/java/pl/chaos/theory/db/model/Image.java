@@ -12,7 +12,8 @@ public class Image extends Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
 	private Long id;
-	@Column(name = "image")
+	@Lob
+        @Column(name = "image", columnDefinition = "mediumblob")
 	private byte[] imageBytes;
 
 	public Long getId() {
