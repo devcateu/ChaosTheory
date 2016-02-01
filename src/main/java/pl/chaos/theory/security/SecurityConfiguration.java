@@ -24,11 +24,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable();
+		httpSecurity.headers().frameOptions().disable();
 
-		httpSecurity.authorizeRequests()
-				.antMatchers("/").permitAll()
+		httpSecurity.authorizeRequests().antMatchers("/console/**").permitAll()
+				.and().authorizeRequests().antMatchers("/").permitAll()
 				.antMatchers("/javax.faces.resource/**").permitAll()
-				.antMatchers("/console/*").permitAll()
 				.antMatchers("/register.jsf", "/login.jsf").not().authenticated()
 				.antMatchers("/roles.jsf").hasAuthority(Role.ADMIN.name())
 				.antMatchers("/enter.jsf").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name())
