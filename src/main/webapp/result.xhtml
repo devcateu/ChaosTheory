@@ -2,13 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+>
 <ui:composition template="layout.xhtml">
   <ui:define name="title">Result</ui:define>
 
   <ui:define name="content">
-    result site.
-    Should include in order algorithm name, result picture and input parameters.
+
+    <p:outputLabel value="#{result.algorithmResult.imageId}"/>
+
   </ui:define>
 
 </ui:composition>

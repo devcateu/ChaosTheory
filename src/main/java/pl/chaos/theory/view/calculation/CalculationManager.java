@@ -50,6 +50,7 @@ public class CalculationManager {
 
 	/**
 	 * Return info about allow algorithm in the system.
+	 *
 	 * @return List of allow algorithms.
 	 */
 	public List<AlgorithmInfo> getAllAlgorithms() {
@@ -84,6 +85,7 @@ public class CalculationManager {
 
 	/**
 	 * Return all results of algorithm for current logged user.
+	 *
 	 * @return Collection of all results of algorithm for current logged user.
 	 */
 	public Collection<AlgorithmResultDto> getAllAlgorithmResultForUser() {
@@ -97,8 +99,15 @@ public class CalculationManager {
 	 * @param resultId Selected calculation id.
 	 * @return Information about selected calculation.
 	 */
-	public ResultView getResultById(Long resultId) {
-		ResultView resultView = new ResultView();
+	public Result getResultById(Long resultId) {
+		if (true) {
+			Result resultView = new Result();
+			AlgorithmResultDto algorithmResult = new AlgorithmResultDto();
+			algorithmResult.setImageId(resultId);
+			resultView.setAlgorithmResult(algorithmResult);
+			return resultView;
+		}
+		Result resultView = new Result();
 		AlgorithmResultDto result = algorithmService.getResultById(resultId);
 		if (result != null) {
 			resultView.setAlgorithmResult(result);
