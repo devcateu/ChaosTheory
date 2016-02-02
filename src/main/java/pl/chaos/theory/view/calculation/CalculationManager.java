@@ -100,13 +100,6 @@ public class CalculationManager {
 	 * @return Information about selected calculation.
 	 */
 	public Result getResultById(Long resultId) {
-		if (true) {
-			Result resultView = new Result();
-			AlgorithmResultDto algorithmResult = new AlgorithmResultDto();
-			algorithmResult.setImageId(resultId);
-			resultView.setAlgorithmResult(algorithmResult);
-			return resultView;
-		}
 		Result resultView = new Result();
 		AlgorithmResultDto result = algorithmService.getResultById(resultId);
 		if (result != null) {
