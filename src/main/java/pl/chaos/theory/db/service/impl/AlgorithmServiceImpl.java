@@ -41,12 +41,12 @@ public class AlgorithmServiceImpl implements AlgorithmService {
 
 	@Override
 	public ImageDto getImageById(Long imageId) {
-		return mapper.map(imageRepository.getOne(imageId), ImageDto.class);
+		return mapper.map(imageRepository.findOne(imageId), ImageDto.class);
 	}
 
 	@Override
 	public AlgorithmResultDto getResultById(Long id) {
-		return mapper.map(algorithmResultRepository.getOne(id), AlgorithmResultDto.class);
+		return mapper.map(algorithmResultRepository.findOne(id), AlgorithmResultDto.class);
 	}
 
 	@Override
