@@ -2,13 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
 <ui:composition template="layout.xhtml">
   <ui:define name="title">Historic Calculation</ui:define>
 
   <ui:define name="content">
     Site present list of historical results.
     Not showing there result picture ! After click some button (or record) should change page into result.jsf and there show picture result.
+
+    <p:dataList value="#{calculationManager.getAllAlgorithmResultForUser()}" var="calculation" type="ordered">
+      <f:facet name="header">
+        Historic Calculation
+      </f:facet>
+      #{calculation.imageId}
+    </p:dataList>
   </ui:define>
 
 </ui:composition>
