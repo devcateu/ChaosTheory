@@ -92,21 +92,4 @@ public class CalculationManager {
 		UserDto userDto = loggedUserService.getCurrentUser();
 		return algorithmService.getAllResultForUser(userDto.getId());
 	}
-
-	/**
-	 * Get full information about selected calculation.
-	 *
-	 * @param resultId Selected calculation id.
-	 * @return Information about selected calculation.
-	 */
-	public Result getResultById(Long resultId) {
-		Result resultView = new Result();
-		AlgorithmResultDto result = algorithmService.getResultById(resultId);
-		if (result != null) {
-			resultView.setAlgorithmResult(result);
-			ImageDto image = algorithmService.getImageById(result.getImageId());
-			resultView.setImage(image);
-		}
-		return resultView;
-	}
 }

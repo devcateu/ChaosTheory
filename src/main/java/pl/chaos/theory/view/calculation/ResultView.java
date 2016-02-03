@@ -2,6 +2,7 @@ package pl.chaos.theory.view.calculation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.chaos.theory.db.service.AlgorithmService;
 import pl.chaos.theory.dto.model.AlgorithmResultDto;
 import pl.chaos.theory.dto.model.ImageDto;
 import pl.chaos.theory.util.Request;
@@ -16,12 +17,34 @@ public class ResultView {
 	private ImageDto image;
 
 	@Autowired
-	public ResultView(CalculationManager calculationManager) {
+	public ResultView(AlgorithmService algorithmService) {
+		tryToFillParametersForUrlId(algorithmService);
+	}
+
+	private void tryToFillParametersForUrlId(AlgorithmService algorithmService) {
+		try {
+			long id = getResultIdFromUrl();
+			fillParameters(algorithmService, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private long getResultIdFromUrl() {
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		long id = Long.parseLong(req.getParameter("id"));
-		Result resultView = calculationManager.getResultById(id);
-		this.image = resultView.getImage();
-		this.algorithmResult = resultView.getAlgorithmResult();
+		return Long.parseLong(req.getParameter("id"));
+	}
+
+	/**
+	 * Fill parameters for selected calculation.
+	 *
+	 * @param resultId Selected calculation id.
+	 */
+	private void fillParameters(AlgorithmService algorithmService, Long resultId) {
+		algorithmResult = algorithmService.getResultById(resultId);
+		if (algorithmResult != null) {
+			image = algorithmService.getImageById(algorithmResult.getImageId());
+		}
 	}
 
 	public AlgorithmResultDto getAlgorithmResult() {
