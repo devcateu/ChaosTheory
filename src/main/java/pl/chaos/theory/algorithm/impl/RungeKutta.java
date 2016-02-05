@@ -31,7 +31,9 @@ public class RungeKutta {
         List <LotkaVolterraResult> results = new ArrayList<LotkaVolterraResult>();
         results.add(new LotkaVolterraResult(t, x, y));
         
-        for(int i = 0; i < tMax * 10; i++) {
+        double i;
+        double stop = t + tMax;
+        for(i = t; i < stop; i += H) {
         
             k1 = model.dxdt(t, x, y);
             l1 = model.dydt(t, x, y);

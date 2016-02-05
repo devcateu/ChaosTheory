@@ -4,15 +4,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
->
+          
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 <ui:composition template="layout.xhtml">
   <ui:define name="title">Result</ui:define>
 
   <ui:define name="content">
 
-    <p:outputLabel value="#{result.algorithmResult.imageId}"/>
+      <h2 style="margin-left: auto; margin-right: auto;" > Results of <h:outputText value="#{result.algorithmResult.algorithmType}"/> algorithm. </h2>
+      <h3>Your parameters:</h3>      
+      <p:dataTable id="parms" var="parm" value="#{result.algorithmResult.parameters}">
+      
+          <p:column headerText="Symbol">
+              <h:outputText value="#{parm.symbol}"/>
+          </p:column>
+          
+          <p:column headerText="Value">
+              <h:outputText value="#{parm.value}"/>
+          </p:column>
+      </p:dataTable>
 
-    <p:graphicImage value="#{calculationManager.image}">
+      <h3 style="margin-left: auto; margin-right: auto;" >Graph:</h3>
+      <p:graphicImage value="#{calculationManager.image}" style="margin-left: auto; margin-right: auto;">
       <f:param name="imageId" value="#{result.algorithmResult.imageId}"/>
     </p:graphicImage>
 

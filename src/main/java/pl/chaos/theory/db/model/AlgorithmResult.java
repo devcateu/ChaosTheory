@@ -19,7 +19,7 @@ public class AlgorithmResult extends Model {
 	private Long userId;
 	@Column(name = "image_id", nullable = false)
 	private Long imageId;
-	@Column(name = "description_id", nullable = false)
+	@Column(name = "description", nullable = false)
 	private String description;
 	@OneToMany(mappedBy = "algorithmResult", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Parameter> parameters;

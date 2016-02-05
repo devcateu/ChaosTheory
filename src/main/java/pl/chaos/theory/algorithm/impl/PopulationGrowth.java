@@ -60,7 +60,7 @@ public class PopulationGrowth implements Algorithm {
 		JFreeChart chart = ChartFactory.createXYLineChart("Frequency",
 				"time", "population", colecion, PlotOrientation.VERTICAL, true, true, true);
 		ImageDto image = new ImageDto();
-		image.setImage(chart.createBufferedImage(500,500));
+		image.setImage(chart.createBufferedImage(800,600));
 		return image;
 	}
 
