@@ -1,5 +1,7 @@
 package pl.chaos.theory.view.calculation;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.chaos.theory.algorithm.AlgorithmFacade;
@@ -12,6 +14,10 @@ import pl.chaos.theory.dto.model.AlgorithmResultDto;
 import pl.chaos.theory.dto.model.ImageDto;
 import pl.chaos.theory.dto.model.UserDto;
 
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -91,5 +97,19 @@ public class CalculationManager {
 	public Collection<AlgorithmResultDto> getAllAlgorithmResultForUser() {
 		UserDto userDto = loggedUserService.getCurrentUser();
 		return algorithmService.getAllResultForUser(userDto.getId());
+	}
+
+	public StreamedContent getImage() throws IOException {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+			// So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
+			return new DefaultStreamedContent();
+		} else {
+			// So, browser is requesting the image. Return a real StreamedContent with the image bytes.
+			String id = context.getExternalContext().getRequestParameterMap().get("imageId");
+			byte[] b = algorithmService.getImageBytesById(Long.parseLong(id));
+			return new DefaultStreamedContent(new ByteArrayInputStream(b));
+		}
 	}
 }

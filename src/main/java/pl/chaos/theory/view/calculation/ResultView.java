@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.chaos.theory.db.service.AlgorithmService;
 import pl.chaos.theory.dto.model.AlgorithmResultDto;
-import pl.chaos.theory.dto.model.ImageDto;
 import pl.chaos.theory.util.Request;
 
 import javax.faces.context.FacesContext;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 @Component("result")
 public class ResultView {
 	private AlgorithmResultDto algorithmResult;
-	private ImageDto image;
 
 	@Autowired
 	public ResultView(AlgorithmService algorithmService) {
@@ -32,7 +30,8 @@ public class ResultView {
 
 	private long getResultIdFromUrl() {
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		return Long.parseLong(req.getParameter("id"));
+		String id = req.getParameter("id");
+		return Long.parseLong(id);
 	}
 
 	/**
@@ -42,9 +41,6 @@ public class ResultView {
 	 */
 	private void fillParameters(AlgorithmService algorithmService, Long resultId) {
 		algorithmResult = algorithmService.getResultById(resultId);
-		if (algorithmResult != null) {
-			image = algorithmService.getImageById(algorithmResult.getImageId());
-		}
 	}
 
 	public AlgorithmResultDto getAlgorithmResult() {
@@ -53,13 +49,5 @@ public class ResultView {
 
 	public void setAlgorithmResult(AlgorithmResultDto algorithmResult) {
 		this.algorithmResult = algorithmResult;
-	}
-
-	public ImageDto getImage() {
-		return image;
-	}
-
-	public void setImage(ImageDto image) {
-		this.image = image;
 	}
 }

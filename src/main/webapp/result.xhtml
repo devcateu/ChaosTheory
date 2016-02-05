@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 <ui:composition template="layout.xhtml">
   <ui:define name="title">Result</ui:define>
@@ -11,6 +11,10 @@
   <ui:define name="content">
 
     <p:outputLabel value="#{result.algorithmResult.imageId}"/>
+
+    <p:graphicImage value="#{calculationManager.image}">
+      <f:param name="imageId" value="#{result.algorithmResult.imageId}"/>
+    </p:graphicImage>
 
   </ui:define>
 

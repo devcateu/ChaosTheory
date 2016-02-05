@@ -21,25 +21,28 @@ public interface AlgorithmService {
 	Collection<AlgorithmResultDto> getAllResultForUser(Long userId);
 
 	/**
-	 * Return image by imageId.
-	 * @param imageId Id of searching image.
-	 * @return Image of selected id, if not find return null.
-	 */
-	ImageDto getImageById(Long imageId);
-
-	/**
 	 * Return AlgorithmResult for id.
+	 *
 	 * @param id Id of searched result.
 	 * @return Result of selected id, if not find return null.
 	 */
 	AlgorithmResultDto getResultById(Long id);
 
 	/**
+	 * Return image by imageId.
+	 *
+	 * @param imageId Id of searching image.
+	 * @return Image of selected id, if not find return null.
+	 */
+	byte[] getImageBytesById(Long imageId);
+
+	/**
 	 * Save result in DB.
-	 * @param description Description for result.
+	 *
+	 * @param description   Description for result.
 	 * @param algorithmType Type of algorithm for which result is saved.
 	 * @param parametersMap Map of parameter which was used to compute algorithm.
-	 * @param imageDto Image result of computing.
+	 * @param imageDto      Image result of computing.
 	 * @return Saved result.
 	 */
 	AlgorithmResultDto saveResult(String description, AlgorithmType algorithmType, Map<String, Double> parametersMap, ImageDto imageDto);
