@@ -74,7 +74,7 @@ public class PopulationGrowth implements Algorithm {
                 parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "a", "Birth rate of prey"));
                 parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "b", "Mortality rate of prey"));
                 parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "c", "Birth rate of predators"));
-                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "d", "Mortality rate of prey"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "d", "Mortality rate of predators"));
 		return parameterInfos;
 	}
 
