@@ -50,7 +50,8 @@ public class CalculationManager {
 		AlgorithmType algorithmType = algorithmView.getSelectedAlgorithm().getAlgorithmType();
 		Map<String, Double> parameters = algorithmView.getInputParams();
 		ImageDto imageDto = algorithmFacade.calculate(algorithmType, parameters);
-		AlgorithmResultDto algorithmResultDto = algorithmService.saveResult("", algorithmType, parameters, imageDto);
+                String description = algorithmView.getSelectedAlgorithm().getDescription();
+		AlgorithmResultDto algorithmResultDto = algorithmService.saveResult(description, algorithmType, parameters, imageDto);
 		return "/result.jsf?faces-redirect=true&id=" + algorithmResultDto.getId();
 	}
 
