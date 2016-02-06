@@ -7,7 +7,7 @@ import java.util.List;
 
 public class RungeKutta {
     
-    private static final double H = 0.1;
+    private static final double H = 0.01;
     
     private LotkaVolterraModel model;
     private double t;
@@ -31,24 +31,24 @@ public class RungeKutta {
         List <LotkaVolterraResult> results = new ArrayList<LotkaVolterraResult>();
         results.add(new LotkaVolterraResult(t, x, y));
         
-        double i;
-        double stop = t + tMax;
-        for(i = t; i < stop; i += H) {
         
-            k1 = model.dxdt(t, x, y);
-            l1 = model.dydt(t, x, y);
+        double stop = t + tMax;
+        for(double i = t; i < stop ; i += H) {
+        
+            k1 = H * model.dxdt(t, x, y);
+            l1 = H * model.dydt(t, x, y);
 
-            k2 = model.dxdt(t + H/2, x + k1/2, y + l1/2);
-            l2 = model.dydt(t + H/2, x + k1/2, y + l1/2);
+            k2 = H * model.dxdt(t + H/2, x + k1/2, y + l1/2);
+            l2 = H * model.dydt(t + H/2, x + k1/2, y + l1/2);
 
-            k3 = model.dxdt(t + H/2, x + k2/2, y + l2/2);
-            l3 = model.dydt(t + H/2, x + k2/2, y + l2/2);
+            k3 = H * model.dxdt(t + H/2, x + k2/2, y + l2/2);
+            l3 = H * model.dydt(t + H/2, x + k2/2, y + l2/2);
 
-            k4 = model.dxdt(t + H, x + k3, y + l3);
-            l4 = model.dydt(t + H, x + k3, y + l3);
+            k4 = H * model.dxdt(t + H, x + k3, y + l3);
+            l4 = H * model.dydt(t + H, x + k3, y + l3);
 
-            x += H * (k1 + 2 * k2 + 2 * k3 + k4) / 6.0;
-            y += H * (l1 + 2 * l2 + 2 * l3 + l4) / 6.0;
+            x += (k1 + 2 * k2 + 2 * k3 + k4) / 6.0;
+            y += (l1 + 2 * l2 + 2 * l3 + l4) / 6.0;
 
             t += H;
             

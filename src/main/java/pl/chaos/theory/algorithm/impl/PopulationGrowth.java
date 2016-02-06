@@ -37,7 +37,7 @@ public class PopulationGrowth implements Algorithm {
             LotkaVolterraModel model = new LotkaVolterraModel(parameters.get("x"),
                     parameters.get("y"), parameters.get("t"), parameters.get("a"),
                     parameters.get("b"), parameters.get("c"), parameters.get("d"));
-            RungeKutta rk = new RungeKutta(model, parameters.get("time") * 10);
+            RungeKutta rk = new RungeKutta(model, parameters.get("time"));
             List<LotkaVolterraResult> results;
             results = rk.solve();
 
@@ -60,7 +60,7 @@ public class PopulationGrowth implements Algorithm {
 		JFreeChart chart = ChartFactory.createXYLineChart("Frequency",
 				"time", "population", colecion, PlotOrientation.VERTICAL, true, true, true);
 		ImageDto image = new ImageDto();
-		image.setImage(chart.createBufferedImage(800,600));
+		image.setImage(chart.createBufferedImage(1000,800));
 		return image;
 	}
 
