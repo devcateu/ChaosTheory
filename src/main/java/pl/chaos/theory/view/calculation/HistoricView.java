@@ -22,4 +22,8 @@ public class HistoricView {
 	public void setParameters(Set<ParameterDto> parameters) {
 		Util.copyCollection(this.parameters, parameters);
 	}
+
+    public String ViewDetails(Long Id){
+        return "/result.jsf?faces-redirect=true&id=" + Id;
+    }
 }
