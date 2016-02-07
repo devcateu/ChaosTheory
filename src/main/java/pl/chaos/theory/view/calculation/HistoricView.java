@@ -1,19 +1,26 @@
 package pl.chaos.theory.view.calculation;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.chaos.theory.dto.model.AlgorithmResultDto;
 import pl.chaos.theory.dto.model.ParameterDto;
 import pl.chaos.theory.util.Util;
+import pl.chaos.theory.util.View;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.view.ViewScoped;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-@ViewScoped
-@ManagedBean(name = "historicV")
 @Component("historic")
+@View
 public class HistoricView {
 	private final Set<ParameterDto> parameters = new HashSet<ParameterDto>();
+	private Collection<AlgorithmResultDto> allAlgorithmResultForUser;
+
+	@Autowired
+	public HistoricView(CalculationManager calculationManager) {
+		allAlgorithmResultForUser = calculationManager.getAllAlgorithmResultForUser();
+	}
 
 	public Set<ParameterDto> getParameters() {
 		return parameters;
@@ -23,7 +30,12 @@ public class HistoricView {
 		Util.copyCollection(this.parameters, parameters);
 	}
 
-    public String ViewDetails(Long Id){
-        return "/result.jsf?faces-redirect=true&id=" + Id;
-    }
+	public String ViewDetails(Long Id) {
+		System.out.println("/result.jsf?faces-redirect=true&id=" + Id);
+		return null;
+	}
+
+	public Collection<AlgorithmResultDto> getAllAlgorithmResultForUser() {
+		return allAlgorithmResultForUser;
+	}
 }

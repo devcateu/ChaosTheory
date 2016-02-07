@@ -3,17 +3,15 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 <ui:composition template="layout.xhtml">
   <ui:define name="title">Historic Calculation</ui:define>
 
   <ui:define name="content">
-    Site present list of historical results.
-    Not showing there result picture ! After click some button (or record) should change page into result.jsf and there show picture result.
 
-    <p:dataTable var="calculation" value="#{calculationManager.getAllAlgorithmResultForUser()}">
+    <p:dataTable var="calculation" value="#{historic.getAllAlgorithmResultForUser()}">
       <p:column style="width:32px;text-align: center" headerText="Id">
-        <h:outputText value="#{calculation.imageId}"/>
+        <h:outputText value="#{calculation.id}"/>
       </p:column>
 
       <p:column style="width:220px" headerText="AlgorithmType">
@@ -34,7 +32,7 @@
 
       <p:column style="width:120px;text-align: center" headerText="Show details">
         <h:form>
-          <p:commandButton value="Results" action="#{historic.ViewDetails(calculation.imageId)}" type="submit"/>
+          <p:commandButton value="Results" action="#{historic.ViewDetails(calculation.id)}" type="submit"/>
         </h:form>
       </p:column>
     </p:dataTable>
@@ -43,16 +41,16 @@
       <p:dialog header="Show Parameters" widgetVar="dlg" showEffect="fade" hideEffect="explode" minWidth="30" width="800" height="300">
         <p:outputPanel id="documentPanel">
 
-            <p:dataTable id="parms" var="parm" value="#{historic.parameters}">
+          <p:dataTable id="parms" var="parm" value="#{historic.parameters}">
 
-                <p:column headerText="Symbol">
-                    <h:outputText value="#{parm.symbol}"/>
-                </p:column>
+            <p:column headerText="Symbol">
+              <h:outputText value="#{parm.symbol}"/>
+            </p:column>
 
-                <p:column headerText="Value">
-                    <h:outputText value="#{parm.value}"/>
-                </p:column>
-            </p:dataTable>
+            <p:column headerText="Value">
+              <h:outputText value="#{parm.value}"/>
+            </p:column>
+          </p:dataTable>
 
         </p:outputPanel>
       </p:dialog>

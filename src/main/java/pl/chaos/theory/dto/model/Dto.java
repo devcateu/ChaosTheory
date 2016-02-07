@@ -1,7 +1,7 @@
 package pl.chaos.theory.dto.model;
 
 /**
- * Base class for
+ * Base class for all dtos
  */
 public abstract class Dto {
 	private Long id;
