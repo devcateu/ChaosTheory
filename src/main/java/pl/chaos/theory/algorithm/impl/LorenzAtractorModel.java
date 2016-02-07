@@ -1,14 +1,8 @@
 package pl.chaos.theory.algorithm.impl;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
- *
- * @author krzgac
+ * * @ Implementation of Lorentz Attractor Model.
  */
 public class LorenzAtractorModel {
     
@@ -19,6 +13,16 @@ public class LorenzAtractorModel {
     private double b;
     private double c;
 
+    /**
+	 * Create a new instance of Lorenz Attractor Model.
+	 *
+	 * @param x - x start point
+         * @param y - y start point
+         * @param z - z start point
+         * @param a - parameter a
+	 * @param b - parameter b
+         * @param c - parameter c 
+	 */
     public LorenzAtractorModel(double x, double y, double z, double a, double b, double c) {
         this.x = x;
         this.y = y;
@@ -29,19 +33,43 @@ public class LorenzAtractorModel {
         System.out.println(this);    
     }
     
+    /**
+	 * Return value after integrated over x.
+	 *
+	 * @param x - x value
+         * @param y - y value
+         * @param z - z value
+         * 
+	 * @return  - integrated value over x.
+	 */
     public double dxdt( double x, double y, double z) {
-        double res = a * (y - x);
-        return res;
+        return a * (y - x);
     }
     
+    /**
+	 * Return value after integrated over y.
+	 *
+	 * @param x - x value
+         * @param y - y value
+         * @param z - z value
+         * 
+	 * @return  - integrated value over y.
+	 */
     public double dydt( double x, double y, double z) {
-        double res = x * (b - z) - y;
-        return res;
+        return x * (b - z) - y;
     }
     
+    /**
+	 * Return value after integrated over z.
+	 *
+	 * @param x - x value
+         * @param y - y value
+         * @param z - z value
+         * 
+	 * @return  - integrated value over z.
+	 */
      public double dzdt( double x, double y, double z) {
-         double res = x * y - c * z;
-         return res;
+         return x * y - c * z;
     }
 
     public double getX() {

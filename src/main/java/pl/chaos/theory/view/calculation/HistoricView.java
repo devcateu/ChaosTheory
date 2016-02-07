@@ -30,7 +30,7 @@ public class HistoricView {
 		Util.copyCollection(this.parameters, parameters);
 	}
 
-	public String ViewDetails(Long Id) {
+	public String goToResultsPage(Long Id) {
 		return "/result.jsf?faces-redirect=true&id=" + Id;
 	}
 

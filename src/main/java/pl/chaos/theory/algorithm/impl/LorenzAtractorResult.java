@@ -1,14 +1,9 @@
 package pl.chaos.theory.algorithm.impl;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /**
- *
- * @author krzgac
+ * Implementation of Lorenz Atractor Result. Class contains calculated points.
  */
 public class LorenzAtractorResult {
     
@@ -16,6 +11,13 @@ public class LorenzAtractorResult {
     private double y;
     private double z;
 
+     /**
+	 * Create a new instance of LorenzAtractorResult.
+	 *
+	 * @param x - x calculated point
+         * @param y - y calculated point
+         * @param z - z calculated point
+	 */
     public LorenzAtractorResult(double x, double y, double z) {
         this.x = x;
         this.y = y;

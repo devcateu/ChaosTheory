@@ -4,7 +4,9 @@ package pl.chaos.theory.algorithm.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Implementation of Runge Kutta algorithm.
+ */
 public class RungeKutta {
     
     private static final double H = 0.01;
@@ -15,6 +17,12 @@ public class RungeKutta {
     private double x;
     private double y;
 
+    /**
+	 * Create a new instance of Runge Kutta.
+	 *
+	 * @param model - model of Lotka Voltera
+         * @param t - time of simulation
+	 */
     public RungeKutta(LotkaVolterraModel model, double t) {
         this.model = model;
         this.tMax = t;
@@ -23,6 +31,11 @@ public class RungeKutta {
         this.y = model.getY0();
     }
     
+    /**
+	 * Solve  Lotka Volterra algorithm using Runge Kutta 4 method.
+	 *
+         * @return - results, List of callculated points
+	 */
     public List<LotkaVolterraResult> solve() {
         
         double k1, k2, k3, k4;
