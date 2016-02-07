@@ -1,5 +1,6 @@
 package pl.chaos.theory.algorithm.impl;
 
+import java.awt.Rectangle;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,8 @@ import java.util.Map;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -50,6 +53,10 @@ public class LorenzAttractor implements Algorithm {
             
             JFreeChart chart = ChartFactory.createScatterPlot("Lorenz Attractor",
                 "x", "y", colection, PlotOrientation.VERTICAL, true, true, true);
+            
+            XYPlot plot = (XYPlot) chart.getPlot();
+            XYItemRenderer render = plot.getRenderer();
+            render.setShape(new Rectangle(1,1));
             
             ImageDto image = new ImageDto();
             image.setImage(chart.createBufferedImage(800, 800));
