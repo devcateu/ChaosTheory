@@ -31,8 +31,7 @@ public class HistoricView {
 	}
 
 	public String ViewDetails(Long Id) {
-		System.out.println("/result.jsf?faces-redirect=true&id=" + Id);
-		return null;
+		return "/result.jsf?faces-redirect=true&id=" + Id;
 	}
 
 	public Collection<AlgorithmResultDto> getAllAlgorithmResultForUser() {
