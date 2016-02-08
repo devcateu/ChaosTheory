@@ -4,7 +4,9 @@ package pl.chaos.theory.algorithm.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Class solve equations for Lorenz Model.
+ */
 public class LorenzAttractorSolver {
     
     private static final double H = 0.001;
@@ -15,15 +17,25 @@ public class LorenzAttractorSolver {
     public double y;
     public double z;
 
-    public LorenzAttractorSolver(LorenzAtractorModel modeli, int tMax) {
-        model = modeli;
-        x = model.getX();
-        y = model.getY();
-        z = model.getZ();
-        maxIteration = tMax;
-        System.out.println(this);
+    /**
+	 * Create a new instance of  LorenzAttractorSolver.
+	 *
+	 * @param model - model of Lorenz Attractor
+         * @param maxIteration - max itterations steps
+	 */
+    public LorenzAttractorSolver(LorenzAtractorModel model, int maxIteration) {
+        this.model = model;
+        this.x = model.getX();
+        this.y = model.getY();
+        this.z = model.getZ();
+        this.maxIteration = maxIteration;
     }
     
+    /**
+	 * Solve Lorenz Attractor algorithm using Euler method.
+	 *
+         * @return - results, List of callculated points
+	 */
    public List<LorenzAtractorResult> solve() {
        
        List <LorenzAtractorResult> results = new ArrayList<LorenzAtractorResult>();
@@ -41,7 +53,6 @@ public class LorenzAttractorSolver {
        
       }
       return results;
-
    }    
 
     @Override

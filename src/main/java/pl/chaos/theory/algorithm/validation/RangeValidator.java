@@ -19,7 +19,7 @@ public class RangeValidator implements ParameterValidator {
 
 	@Override
 	public boolean validate(Double value, ParameterInfo parameterInfo, Map<String, Double> allParameters) {
-		return value > minimum && value < maximum;
+		return value >= minimum && value <= maximum;
 	}
 
 	@Override

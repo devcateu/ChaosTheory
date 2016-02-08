@@ -1,12 +1,21 @@
 package pl.chaos.theory.algorithm.impl;
 
-
+/**
+ * Implementation of Lotka Volterra Result. Class contains calculated points.
+ */
 public class LotkaVolterraResult {
     
     double t;
     double x;
     double y;
 
+     /**
+	 * Create a new instance of  Lotka Volterra Result.
+	 *
+	 * @param t - time of simulation
+         * @param x - x calculated point
+         * @param y - y calculated point
+	 */
     public LotkaVolterraResult(double t, double x, double y) {
         this.t = t;
         this.x = x;

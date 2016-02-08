@@ -22,10 +22,10 @@ import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-//TODO : implemnt it
+
 @Component
 /**
- * Implementation of Chaos Number Generation Algorithm.
+ * Implementation of Lorenz Attractor Algorithm.
  */
 public class LorenzAttractor implements Algorithm {
 	private final static AlgorithmType algorithmType = AlgorithmType.LORENZ_ATTRACTOR;
@@ -52,7 +52,7 @@ public class LorenzAttractor implements Algorithm {
             OutputStream outImage = new ByteArrayOutputStream();
             
             JFreeChart chart = ChartFactory.createScatterPlot("Lorenz Attractor",
-                "x", "y", colection, PlotOrientation.VERTICAL, true, true, true);
+                "X", "Z", colection, PlotOrientation.VERTICAL, true, true, true);
             
             XYPlot plot = (XYPlot) chart.getPlot();
             XYItemRenderer render = plot.getRenderer();
@@ -77,7 +77,7 @@ public class LorenzAttractor implements Algorithm {
 
 	@Override
 	public AlgorithmInfo getAlgorithmInfo() {
-		return new AlgorithmInfo(algorithmType.name(), "deeees", algorithmType);
+		return new AlgorithmInfo(algorithmType.name(), "Algorithm generate a Lorenz Attractor. Draw a scope.", algorithmType);
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package pl.chaos.theory.algorithm.impl;
 
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
@@ -14,17 +13,14 @@ import pl.chaos.theory.algorithm.ParameterInfo;
 import pl.chaos.theory.algorithm.validation.RangeValidator;
 import pl.chaos.theory.dto.model.ImageDto;
 
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 
-//TODO : implemnt it
+
 @Component
 /**
  * Implementation of Population Growth Algorithm.
@@ -41,12 +37,12 @@ public class PopulationGrowth implements Algorithm {
             List<LotkaVolterraResult> results;
             results = rk.solve();
 
-		XYSeries xSeries = new XYSeries("preys");
+		XYSeries xSeries = new XYSeries("Preys");
 		for (LotkaVolterraResult result : results) {
 			xSeries.add(result.getT(), result.getX());
 		}
 
-		XYSeries ySeries = new XYSeries("predators");
+		XYSeries ySeries = new XYSeries("Predators");
 		for (LotkaVolterraResult result : results) {
 			ySeries.add(result.getT(), result.getY());
 		}
@@ -57,24 +53,24 @@ public class PopulationGrowth implements Algorithm {
 
 		OutputStream outImage=new ByteArrayOutputStream();
 
-		JFreeChart chart = ChartFactory.createXYLineChart("Frequency",
-				"time", "population", colecion, PlotOrientation.VERTICAL, true, true, true);
+		JFreeChart chart = ChartFactory.createXYLineChart("Frequency Plot",
+				"Time", "Population", colecion, PlotOrientation.VERTICAL, true, true, true);
 		ImageDto image = new ImageDto();
-		image.setImage(chart.createBufferedImage(1000,800));
+		image.setImage(chart.createBufferedImage(800,600));
 		return image;
 	}
 
 	@Override
 	public List<ParameterInfo> parameters() {
 		ArrayList<ParameterInfo> parameterInfos = new ArrayList<ParameterInfo>();
-		parameterInfos.add(new ParameterInfo(new RangeValidator(1, 1000), "x", "Initial populations of prey"));
-		parameterInfos.add(new ParameterInfo(new RangeValidator(1, 1000), "y", "Initial populations of predators"));
-                parameterInfos.add(new ParameterInfo(new RangeValidator(1, 100), "t", "Start time of simulation"));
+		parameterInfos.add(new ParameterInfo(new RangeValidator(1, 200), "x", "Initial populations of prey"));
+		parameterInfos.add(new ParameterInfo(new RangeValidator(1, 200), "y", "Initial populations of predators"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 100), "t", "Start time of simulation"));
                 parameterInfos.add(new ParameterInfo(new RangeValidator(1, 1000), "time", "Time of simulation"));
-                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "a", "Birth rate of prey"));
-                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "b", "Mortality rate of prey"));
-                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "c", "Birth rate of predators"));
-                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "d", "Mortality rate of predators"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 1), "a", "Birth rate of prey"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 1), "b", "Mortality rate of prey"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 1), "c", "Birth rate of predators"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 1), "d", "Mortality rate of predators"));
 		return parameterInfos;
 	}
 
