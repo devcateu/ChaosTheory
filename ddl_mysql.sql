@@ -1,9 +1,5 @@
 
 
-    alter table parameter 
-        drop 
-        foreign key FK_fxiyt9dpik3yoj56v1rdis3j8;
-
     drop table if exists parameter;
 
     drop table if exists algorithm_result;
@@ -51,4 +47,6 @@
         foreign key (algorithm_Result_Id) 
         references algorithm_result (id);
 
-INSERT INTO `koko`.`user` (`id`, `email`, `password_hash`, `role`) VALUES (NULL, 'admin@admin.com', 'admin', 'ADMIN');
+INSERT INTO `chaosTheory`.`user` (`id`, `email`, `password_hash`, `role`) VALUES (NULL, 'admin@admin.com', 'admin', 'ADMIN');
+
+CREATE USER 'megaAdmin'@'%';GRANT ALL PRIVILEGES ON *.* TO 'megaAdmin'@'%' REQUIRE NONE WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;GRANT ALL PRIVILEGES ON `chaosTheory`.* TO 'megaAdmin'@'%';
