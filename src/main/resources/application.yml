@@ -6,12 +6,6 @@ spring:
 
 server:
   port: 9090
----
-
-spring:
-  profiles: development
-  profiles.include: h2
-
 
 servlet:
   container:
@@ -20,8 +14,31 @@ servlet:
 ---
 
 spring:
+  profiles: development
+  profiles.include: h2
+
+---
+spring:
+  profiles: production
+  profiles.include: db
+
+---
+
+spring:
   profiles: test
   profiles.include: h2
+
+---
+
+spring:
+  profiles: db
+  datasource:
+    url: jdbc:mysql://localhost:3306/koko
+    username: megaUser
+    password:
+    driverClassName: com.mysql.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
 
 ---
 
