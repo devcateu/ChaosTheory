@@ -69,9 +69,9 @@ public class LorenzAttractor implements Algorithm {
 		parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "x", "x starting value"));
 		parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "y", "y starting value"));
                 parameterInfos.add(new ParameterInfo(new RangeValidator(0, 10), "z", "z starting value"));
-		parameterInfos.add(new ParameterInfo(new RangeValidator(0, 50), "a", "parameter a (Lorenz default value: 10)"));
-                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 50), "b", "parameter b (Lorenz default value: 28)"));
-		parameterInfos.add(new ParameterInfo(new RangeValidator(0, 50), "c", "parameter c (Lorenz default value: 2.26)"));
+		parameterInfos.add(new ParameterInfo(new RangeValidator(0, 50), "a", "Prandtla number (Lorenz default value: 10)"));
+                parameterInfos.add(new ParameterInfo(new RangeValidator(0, 100), "b", "Reyleigha number (Lorenz default value: 28)"));
+		parameterInfos.add(new ParameterInfo(new RangeValidator(0, 50), "c", "Area dimmension (Lorenz default value: 2.26)"));
 		return parameterInfos;
 	}
 
